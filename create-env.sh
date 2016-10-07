@@ -53,11 +53,14 @@ sec_group_id="sg-c109bbb8"
 lb_dns_name=$(aws elb create-load-balancer --load-balancer-name "$load_balancer_name" --availability-zones "$instance_zone" \
 --listeners "$lb_listener" --security-groups "$sec_group_id" --output "text")
 
+# Attaches load balancer: bootstrap-website-lb to autoscaling group: bootstrap-website-asg
+aws autoscaling attach-load-balancers --auto-scaling-group-name "$auto_scaling_group_name" \
+--load-balancer-names "$load_balancer_name"
 
 printf "\n"
 printf "Load-balancer-url to SAT NextGen bootstrap website: $lb_dns_name\n\n"
-printf "**May have to wait 2-5 mins for the following:\n"
+printf "**May have to wait 2-5 mins for the following to complete:\n"
 printf "\t1. Instances of autoscaling group to become running\n"
-printf "\t2. Initialization of these instances with the specified user-date script provided to complete\n"
+printf "\t2. Initialization of these instances with the specified user-data script provided\n"
 printf "\t3. Instances of the autoscaling group to become InService in the load balancer\n"
 
