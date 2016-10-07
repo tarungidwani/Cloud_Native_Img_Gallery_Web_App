@@ -44,3 +44,12 @@ aws autoscaling create-auto-scaling-group --launch-configuration-name "$launch_c
 # Waits for all instances in auto-scaling-group to spawn and become running
 # aws ec2 wait instance-running --instance-ids $asg_instance_ids  2> log.txt
 
+# Variables for creating a classic load balancer
+load_balancer_name="bootstrap-website-lb"
+lb_listener="Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80"
+sec_group_id="sg-c109bbb8"
+
+# Creates a new classic load balancer with the name bootstrap-website-lb
+lb_dns_name=$(aws elb create-load-balancer --load-balancer-name "$load_balancer_name" --availability-zones "$instance_zone" \
+--listeners "$lb_listener" --security-groups "$sec_group_id" --output "text")
+
