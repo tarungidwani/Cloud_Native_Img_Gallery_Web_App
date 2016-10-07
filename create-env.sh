@@ -8,30 +8,39 @@ instance_user_data="file://installenv.sh"
 security_group_name="bootstrap-website-sec-group"
 key_name="tarun-itmo-444-access-key"
 
+# Creates a new launch configuration with the name bootstrap-website-lc
+aws autoscaling create-launch-configuration --image-id "$instance_ami" --instance-type "$instance_type" \
+--launch-configuration-name "$launch_configuration_name" --user-data "$instance_user_data" \
+--security-groups "$security_group_name" --key-name "$key_name" 2> log.txt
+
 # Variables for creating autoscaling-group
 auto_scaling_group_name="bootstrap-website-asg"
 desired_capacity=4
 instance_zone="us-west-2b"
 
-# Creates a new launch configuration with the name bootstrap-website-lc
-aws autoscaling create-launch-configuration --image-id "$instance_ami" --instance-type "$instance_type" \
---launch-configuration-name "$launch_configuration_name" --user-data "$instance_user_data" \
---security-groups "$security_group_name" --key-name "$key_name" 2>> log.txt
-
 # Creates a new auto scaling group with the name bootstrap-website-asg
 aws autoscaling create-auto-scaling-group --launch-configuration-name "$launch_configuration_name" \
 --auto-scaling-group-name "$auto_scaling_group_name" --desired-capacity "$desired_capacity" \
---min-size "$desired_capacity" --max-size "$desired_capacity" --availability-zones "$instance_zone"
+--min-size "$desired_capacity" --max-size "$desired_capacity" --availability-zones "$instance_zone" 2> log.txt
 
+# ** Unable to wait for instances of the auto-scaling-group created 
+#    above to become running because after running the create-auto-scaling-group 
+#    command it does not return anything and the group is not created immdeiately. 
+#    So when I try to run describe-autoscaling-groups and query for the intance-ids 
+#    of the above created autoscaling group I get back an empty string. Thus this 
+#     prevents me from passing the instance-ids of said auto-scaling group to 
+#    the wait instance-running command preventing my script to wait till 
+#    all these instances of the autoscaling group become running
+# **
+# Tried the following but unsuccessful without using the sleep 
+# command with an arbitrary time to wait. Using sleep did not 
+# seem like the best approach so I decided not to wait for the 
+# instances of the autoscaling group to become running.
 
+# asg_instance_ids=`aws autoscaling describe-auto-scaling-groups 
+#--auto-scaling-group-names  "bootstrap-website-asg" 
+# --query AutoScalingGroups[].Instances[].InstanceId --output "text"`
 
-
-
-
-
-
-
-
-
-
+# Waits for all instances in auto-scaling-group to spawn and become running
+# aws ec2 wait instance-running --instance-ids $asg_instance_ids  2> log.txt
 
