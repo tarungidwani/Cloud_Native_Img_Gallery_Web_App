@@ -1,7 +1,16 @@
 #!/bin/bash
 
+# Checks if the user specified an AMI ID as an 
+# argument to this script
+
+if [ "$1" == "" ]
+then
+	printf "\n***Please provide an Amazon AMI image ID as an argument to this script***\n\n"
+	exit 1
+fi
+
 # Variables for creating launch configuration
-instance_ami="ami-06b94666"
+instance_ami="$1"
 instance_type="t2.micro"
 launch_configuration_name="bootstrap-website-lc"
 instance_user_data="file://installenv.sh"
@@ -51,11 +60,11 @@ sec_group_id="sg-c109bbb8"
 
 # Creates a new classic load balancer with the name bootstrap-website-lb
 lb_dns_name=$(aws elb create-load-balancer --load-balancer-name "$load_balancer_name" --availability-zones "$instance_zone" \
---listeners "$lb_listener" --security-groups "$sec_group_id" --output "text")
+--listeners "$lb_listener" --security-groups "$sec_group_id" --output "text" 2> log.txt)
 
 # Attaches load balancer: bootstrap-website-lb to autoscaling group: bootstrap-website-asg
 aws autoscaling attach-load-balancers --auto-scaling-group-name "$auto_scaling_group_name" \
---load-balancer-names "$load_balancer_name"
+--load-balancer-names "$load_balancer_name" 2> log.txt
 
 printf "\n"
 printf "Load-balancer-url to SAT NextGen bootstrap website: $lb_dns_name\n\n"
