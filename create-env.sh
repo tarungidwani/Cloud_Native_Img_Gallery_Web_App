@@ -1,8 +1,13 @@
 #!/bin/bash
 
+# Name: Tarun Gidwani
+# Script name: destroy.sh
+# Purpose: Creates an autoscaling group with a desired number of 
+#          instances and a load balancer attached to it
+
+
 # Checks if the user specified an AMI ID as an 
 # argument to this script
-
 if [ "$1" == "" ]
 then
 	printf "\n***Please provide an Amazon AMI image ID as an argument to this script***\n\n"
