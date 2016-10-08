@@ -48,6 +48,20 @@ function delete_all_launch_configurations
 	done
 }
 
+# Deletes all classic load balancers
+# in the default region
+function delete_all_load_balancers 
+{
+	local all_load_balancers=($(aws elb describe-load-balancers --query "LoadBalancerDescriptions[*].LoadBalancerName" \
+													 --output "text" 2>> $log_file))
+
+	for load_balancer in ${all_load_balancers[@]}
+	do
+		aws elb delete-load-balancer --load-balancer-name $load_balancer 2>> $log_file
+	done
+}
+
+
 # Destroys all EC2 objects:
 # Auto-scaling-groups
 function destroy_env
@@ -58,6 +72,10 @@ function destroy_env
 
 	printf "Deleting all launch configurations.........\n"
 	delete_all_launch_configurations
+	printf "Completed successfully!\n"
+
+	printf "Deleting all load balancers.........\n"
+	delete_all_load_balancers
 	printf "Completed successfully!\n"
 }
 
