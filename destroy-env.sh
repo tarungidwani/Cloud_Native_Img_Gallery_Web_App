@@ -61,9 +61,24 @@ function delete_all_load_balancers
 	done
 }
 
+# Terminates all instances in
+# the default region
+function terminate_all_instances 
+{
+	local all_instances=($(aws ec2 describe-instances --query "Reservations[*].Instances[*].InstanceId" --output text 2>> $log_file))
+	
+	for instance in ${all_instances[@]}
+	do
+		aws ec2 terminate-instances --instance-id $instance > /dev/null 2>> $log_file
+		aws ec2 wait instance-terminated --instance-ids $instance 2>> $log_file
+	done
+}
 
 # Destroys all EC2 objects:
 # Auto-scaling-groups
+# Launch configurations
+# Classic load balancers
+# Instances
 function destroy_env
 {
 	printf "Deleting all auto-scaling-groups.........\n"
@@ -76,6 +91,10 @@ function destroy_env
 
 	printf "Deleting all load balancers.........\n"
 	delete_all_load_balancers
+	printf "Completed successfully!\n"
+
+	printf "Terminating all instances.........\n"
+	terminate_all_instances
 	printf "Completed successfully!\n"
 }
 
