@@ -6,11 +6,13 @@
 #          instances and a load balancer attached to it
 
 
-# Checks if the user specified an AMI ID as an 
-# argument to this script
-if [ "$1" == "" ]
+# Checks if the user specified the 5 
+# required arguments to this script
+if [ $# -ne 5 ]
 then
-	printf "\n***Please provide an Amazon AMI image ID as an argument to this script***\n\n"
+	printf "\n***\nPlease provide the following 5 arguments in the given order:\n\n"
+	printf " 1. AMI ID\n 2. key-name\n 3. security-group\n 4. launch-configuration\n 5. count\n"
+	printf "***\n\n"
 	exit 1
 fi
 
