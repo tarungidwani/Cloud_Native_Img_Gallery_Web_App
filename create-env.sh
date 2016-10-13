@@ -18,11 +18,16 @@ fi
 
 # Variables for creating launch configuration
 instance_ami="$1"
+key_name="$2"
+security_group_name="$3"
+launch_configuration_name="$4"
+# I have no use for number of
+# instances to launch as I am 
+# not explicitly launching 
+# instances
+count="$5"
 instance_type="t2.micro"
-launch_configuration_name="bootstrap-website-lc"
 instance_user_data="file://installenv.sh"
-security_group_name="bootstrap-website-sec-group"
-key_name="tarun-itmo-444-access-key"
 
 # Creates a new launch configuration with the name bootstrap-website-lc
 aws autoscaling create-launch-configuration --image-id "$instance_ami" --instance-type "$instance_type" \
