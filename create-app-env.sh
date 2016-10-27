@@ -29,4 +29,8 @@ aws rds create-db-instance --engine "$db_engine" --db-instance-class "$db_instan
                            --availability-zone "$availability_zone" --vpc-security-group-ids "$security_group_id" --db-name "$db_name" \
 > /dev/null 2>> "$log_file_name"
 
+# Waits for specified db instance to
+# become available
+aws rds wait db-instance-available --db-instance-identifier "$db_instance_identifier"
+
 
