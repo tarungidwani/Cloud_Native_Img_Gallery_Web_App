@@ -6,6 +6,20 @@
 
 log_file=delete-log.txt
 
+# Deletes all DB instances and the data 
+# stored in them (RDS)
+function delete_all_db_instances
+{
+		local db_instance_identifiers=($(aws rds describe-db-instances --query DBInstances[*].DBInstanceIdentifier \
+																		 --output text 2>> $log_file))
+
+		for db_instance_identifier in "${db_instance_identifiers[@]}"
+		do
+			aws rds delete-db-instance --db-instance-identifier "$db_instance_identifier" --skip-final-snapshot > /dev/null 2>> $log_file
+			aws rds wait db-instance-deleted --db-instance-identifier "$db_instance_identifier" 2>> $log_file
+		done
+}
+
 # Deletes all auto scaling groups and terminates
 # all instances attached to it in the default
 # region
