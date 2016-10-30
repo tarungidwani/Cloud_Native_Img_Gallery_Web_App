@@ -89,12 +89,18 @@ function terminate_all_instances
 }
 
 # Destroys all EC2 objects:
+# RDS DB instances
 # Auto-scaling-groups
 # Launch configurations
 # Classic load balancers
 # Instances
 function destroy_env
 {
+
+	printf "Deleting all DB instances in RDS........\n"
+	delete_all_db_instances
+	printf "Completed successfully!\n"
+
 	printf "Deleting all auto-scaling-groups.........\n"
 	delete_all_auto_scaling_groups
 	printf "Completed successfully!\n"
