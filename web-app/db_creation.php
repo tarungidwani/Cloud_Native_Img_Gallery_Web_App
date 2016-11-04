@@ -52,4 +52,36 @@
         }
     }
 
+    /* Executes any create or insert query based on the
+     * db info and query passed to it. If the connection
+     * to the DB fails or the execution of the query fails
+     * it prints out an error message and exits the program
+     * with a failure return code
+     */
+    function execute_create_query($db_connection_info, $query_to_execute, $err_msg)
+    {
+        $db_endpoint = get_db_endpoint($db_connection_info['region'],$db_connection_info['db_identifier']);
+        $mysql_connection = new mysqli($db_endpoint,$db_connection_info['db_username'],$db_connection_info['db_password']);
+
+        if(!$mysql_connection->connect_errno)
+        {
+            $is_query_successful = $mysql_connection->query($query_to_execute);
+
+            if(!$is_query_successful)
+            {
+                echo "$err_msg\n";
+                $mysql_connection->close();
+                exit(1);
+            }
+        }
+        else
+        {
+            echo "Failed to connect to RDS instance: $db_endpoint\n";
+            $mysql_connection->close();
+            exit(1);
+        }
+        $mysql_connection->close();
+    }
+
+
 
