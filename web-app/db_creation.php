@@ -11,8 +11,9 @@
 
         if (file_exists($db_connection_file_path))
             return parse_ini_file($db_connection_file_path);
-        else {
+        else
+        {
             echo "Failed to connect to RDS instance: file '$db_connection_file_path' does not exist\n";
-            return null;
+            exit(1);
         }
     }
