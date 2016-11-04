@@ -8,11 +8,24 @@
     function create_students_table_query($db_name, $table_name)
     {
         return <<<SQL
-  CREATE TABLE $db_name.$table_name
-  (
-    ID INT AUTO_INCREMENT PRIMARY KEY,
-    Name VARCHAR(255),
-    Age INT(3)
-  );
+    CREATE TABLE $db_name.$table_name
+    (
+      ID INT AUTO_INCREMENT PRIMARY KEY,
+      Name VARCHAR(255),
+      Age INT(3)
+    );
 SQL;
     }
+
+    function create_insert_students_records_query($db_name, $table_name)
+    {
+        return <<<SQL
+    INSERT INTO $db_name.$table_name (Name, Age)
+    VALUES
+          ("Dev Shah"         , 19),
+          ("Eddie Huang"      , 15),
+          ("Lu Xiajun"        , 21),
+          ("John Wayne Gacey" , 24),
+          ("Bruce Lee"        , 59)
+SQL;
+}
