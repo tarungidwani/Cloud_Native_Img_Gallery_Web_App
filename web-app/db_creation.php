@@ -58,16 +58,24 @@
      * it prints out an error message and exits the program
      * with a failure return code
      */
-    function execute_create_query($db_connection_info, $query_to_execute, $err_msg)
+    function execute_query($db_connection_info, $query_to_execute, $err_msg)
     {
-        $db_endpoint = get_db_endpoint($db_connection_info['region'],$db_connection_info['db_identifier']);
-        $mysql_connection = new mysqli($db_endpoint,$db_connection_info['db_username'],$db_connection_info['db_password']);
+        $mysql_connection = new mysqli($db_connection_info['db_endpoint'],$db_connection_info['db_username'],$db_connection_info['db_password']);
 
         if(!$mysql_connection->connect_errno)
         {
-            $is_query_successful = $mysql_connection->query($query_to_execute);
+            $result = $mysql_connection->query($query_to_execute);
+            $data = array();
 
-            if(!$is_query_successful)
+            if($result)
+            {
+                while($row = $result->fetch_assoc())
+                    $data[] = $row;
+
+                $mysql_connection->close();
+                return $data;
+            }
+            else
             {
                 echo "$err_msg\n";
                 $mysql_connection->close();
@@ -76,12 +84,10 @@
         }
         else
         {
-            echo "Failed to connect to RDS instance: $db_endpoint\n";
+            echo "Failed to connect to RDS instance: $db_connection_info[db_endpoint]\n";
             $mysql_connection->close();
             exit(1);
         }
-        $mysql_connection->close();
     }
-
 
 
