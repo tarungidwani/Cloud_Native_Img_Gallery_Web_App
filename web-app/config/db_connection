@@ -1,5 +1,5 @@
-db_identifier = web-app-db
-db_username = root
-db_password = TestMikeTest!
-db_name = school
-table_name = students
+db_identifier = "web-app-db"
+db_username = "root"
+db_password = "TestMikeTest!"
+db_name = "school"
+table_name = "students"
