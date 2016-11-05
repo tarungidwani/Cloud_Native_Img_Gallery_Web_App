@@ -47,4 +47,7 @@ sudo apt-get -y install git
 sudo git clone "$repo_url" "$repo_tmp_location"
 sudo cp -r $repo_files_locaiton "$apache_file_location"
 
+# Restarts apache2 web server
+# for the changes to take effect
+sudo service apache2 restart
 
