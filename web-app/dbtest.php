@@ -3,6 +3,8 @@
     require 'lib/db_creation.php';
     require 'lib/generate_sql_queries.php';
 
+    define('PATH_TO_DB_CONNECTION_INFO_FILE' , 'config/db_connection');
+
     /*
      * Creates the school DB in RDS instance
      * Creates a table called students in DB school
