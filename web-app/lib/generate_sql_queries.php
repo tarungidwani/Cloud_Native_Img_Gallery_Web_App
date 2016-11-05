@@ -28,6 +28,7 @@ SQL;
           ("Lu Xiajun"        , 21),
           ("John Wayne Gacey" , 24),
           ("Bruce Lee"        , 59)
+    ON DUPLICATE KEY UPDATE Name = VALUES(Name), Age = VALUES(Age);
 SQL;
 }
 
