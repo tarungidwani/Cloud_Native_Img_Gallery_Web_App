@@ -1,6 +1,6 @@
 <?php
 
-    require '../aws_sdk/aws-autoloader.php';
+   require dirname(__DIR__) . '/aws_sdk/aws-autoloader.php';
 
     define('PATH_TO_DB_CONNECTION_INFO_FILE' , 'config/db_connection');
 
@@ -89,6 +89,3 @@
             exit(1);
         }
     }
-
-
-
