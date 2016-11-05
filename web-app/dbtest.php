@@ -3,6 +3,10 @@
     require 'lib/db_creation.php';
     require 'lib/generate_sql_queries.php';
 
+    $db_connection_info = read_info_from_db_config_file();
+    $db_endpoint = get_db_endpoint($db_connection_info['region'],$db_connection_info['db_identifier']);
+    $db_connection_info['db_endpoint'] = $db_endpoint;
+
     /*
      * Creates the school DB in RDS instance
      * Creates a table called students in DB school
@@ -10,10 +14,6 @@
      */
     function setup_db()
     {
-        $db_connection_info = read_info_from_db_config_file();
-        $db_endpoint = get_db_endpoint($db_connection_info['region'],$db_connection_info['db_identifier']);
-        $db_connection_info['db_endpoint'] = $db_endpoint;
-
         // Create school DB
         $query_to_execute = create_db_query($db_connection_info['db_name']);
         $err_msg = "Failed to create database $db_connection_info[db_name]";
