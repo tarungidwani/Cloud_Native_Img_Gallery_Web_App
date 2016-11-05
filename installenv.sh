@@ -2,6 +2,10 @@
 
 apache_file_location=/var/www/html
 
+aws_sdk_tmp_location=/tmp/aws.zip
+aws_sdk_location=$apache_file_location/aws_sdk
+aws_sdk_url=http://docs.aws.amazon.com/aws-sdk-php/v3/download/aws.zip
+
 # Update all repos and upgrade
 # all packages with available
 # updates
@@ -27,4 +31,10 @@ sudo apt-get -y install libapache2-mod-php
 sudo apt-get -y install php-xml
 sudo apt-get -y install php-curl
 sudo apt-get -y install php-mysql
+
+# Installs and setups AWS SDK
+# for PHP
+sudo wget -O "$aws_sdk_tmp_location" "$aws_sdk_url"
+sudo unzip "$aws_sdk_tmp_location" -d "$aws_sdk_location"
+
 
