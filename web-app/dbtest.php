@@ -24,8 +24,7 @@
          * into students table in DB
          * school
          */
-
-
-
+        $query_to_execute = create_insert_student_records_query($db_connection_info['db_name'],$db_connection_info['table_name']);
+        $err_msg = "Failed to insert student records in table $db_connection_info[table_name] in DB $db_connection_info[db_name]";
+        execute_query($db_connection_info, $query_to_execute, $err_msg);
     }
-setup_db();

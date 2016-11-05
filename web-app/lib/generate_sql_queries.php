@@ -17,7 +17,7 @@
 SQL;
     }
 
-    function create_insert_students_records_query($db_name, $table_name)
+    function create_insert_student_records_query($db_name, $table_name)
     {
         return <<<SQL
     INSERT INTO $db_name.$table_name (Name, Age)
