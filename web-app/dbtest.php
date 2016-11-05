@@ -78,6 +78,8 @@
         setup_db($db_connection_info);
 
         $student_records_array = get_student_records($db_connection_info);
+
+        print_all_student_records($student_records_array);
     }
     main();
 
