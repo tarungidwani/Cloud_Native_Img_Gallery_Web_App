@@ -11,8 +11,9 @@
     CREATE TABLE IF NOT EXISTS $db_name.$table_name
     (
       ID INT AUTO_INCREMENT PRIMARY KEY,
-      Name VARCHAR(255),
-      Age INT(3)
+      Name VARCHAR(255) NOT NULL,
+      Age INT(3) NOT NULL,
+      UNIQUE (Name, Age)
     );
 SQL;
     }
