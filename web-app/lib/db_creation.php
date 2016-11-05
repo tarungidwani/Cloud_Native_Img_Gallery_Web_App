@@ -69,19 +69,13 @@
 
             if($result)
             {
-                try
+                if(!is_bool($result))
                 {
                     while ($row = $result->fetch_assoc())
                         $data[] = $row;
-
-                    $mysql_connection->close();
-                    return $data;
                 }
-                catch(Error $e)
-                {
-                    $mysql_connection->close();
-                    return $data;
-                }
+                $mysql_connection->close();
+                return $data;
             }
             else
             {
