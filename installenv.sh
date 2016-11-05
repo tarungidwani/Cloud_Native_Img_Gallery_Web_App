@@ -2,8 +2,11 @@
 
 apache_file_location=/var/www/html
 
-sudo apt-get install -y git
-sudo apt-get install -y apache2
-sudo service apache2 start
-sudo rm -rf $apache_file_location/*
-sudo git clone https://github.com/tarungidwani/boostrap-website.git $apache_file_location
+# Update all repos and upgrade
+# all packages with available
+# updates
+sudo apt-get update
+sudo apt-get -y upgrade
+sudo apt-get -y dist-upgrade
+
+
