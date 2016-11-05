@@ -30,6 +30,20 @@
         execute_query($db_connection_info, $query_to_execute, $err_msg);
     }
 
+    /* Querys the student table in DB school
+     * and retrieves all the student records
+     * and returns all of them as part of
+     * an array
+    */
+    function get_student_records($db_connection_info)
+    {
+        $query_to_execute = create_select_all_records_query($db_connection_info['db_name'],$db_connection_info['table_name']);
+        $err_msg = "Failed to read student records from table $db_connection_info[table_name] in DB $db_connection_info[db_name]";
+        $student_records_array = execute_query($db_connection_info, $query_to_execute, $err_msg);
+
+        return $student_records_array;
+    }
+
     // Execution of this program begins here
     function main()
     {
@@ -38,8 +52,6 @@
         $db_connection_info['db_endpoint'] = $db_endpoint;
 
         setup_db($db_connection_info);
-
-
     }
     main();
 
