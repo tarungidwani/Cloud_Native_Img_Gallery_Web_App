@@ -6,6 +6,10 @@ aws_sdk_tmp_location=/tmp/aws.zip
 aws_sdk_location=$apache_file_location/aws_sdk
 aws_sdk_url=http://docs.aws.amazon.com/aws-sdk-php/v3/download/aws.zip
 
+repo_url=git@github.com:illinoistech-itm/tgidwani.git
+repo_tmp_location=/tmp/repo
+repo_files_locaiton=$repo_tmp_location/web-app/*
+
 # Update all repos and upgrade
 # all packages with available
 # updates
@@ -34,7 +38,13 @@ sudo apt-get -y install php-mysql
 
 # Installs and setups AWS SDK
 # for PHP
+sudo rm -rf "$apache_file_location"/*
 sudo wget -O "$aws_sdk_tmp_location" "$aws_sdk_url"
 sudo unzip "$aws_sdk_tmp_location" -d "$aws_sdk_location"
+
+# Install and setup web-app
+sudo apt-get -y install git
+sudo git clone "$repo_url" "$repo_tmp_location"
+sudo cp -r $repo_files_locaiton "$apache_file_location"
 
 
