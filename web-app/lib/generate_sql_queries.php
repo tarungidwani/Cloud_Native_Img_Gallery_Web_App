@@ -2,7 +2,7 @@
 
     function create_db_query($db_name)
     {
-        return "CREATE DATABASE $db_name";
+        return "CREATE DATABASE IF NOT EXISTS $db_name";
     }
 
     function create_students_table_query($db_name, $table_name)
