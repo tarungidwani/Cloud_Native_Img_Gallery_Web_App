@@ -10,7 +10,9 @@
         $db_connection_info['db_endpoint'] = $db_endpoint;
 
         // Create school DB
-
+        $query_to_execute = create_db_query($db_connection_info['db_name']);
+        $err_msg = "Failed to create database $db_connection_info[db_name]";
+        execute_query($db_connection_info, $query_to_execute, $err_msg);
 
         // Create students table
 
@@ -19,7 +21,8 @@
          * into students table in DB
          * school
          */
-        
+
 
 
     }
+setup_db();
