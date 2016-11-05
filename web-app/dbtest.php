@@ -15,6 +15,9 @@
         execute_query($db_connection_info, $query_to_execute, $err_msg);
 
         // Create students table
+        $query_to_execute = create_students_table_query($db_connection_info['db_name'],$db_connection_info['table_name']);
+        $err_msg = "Failed to create table $db_connection_info[table_name] in DB $db_connection_info[db_name]";
+        execute_query($db_connection_info, $query_to_execute, $err_msg);
 
         /*
          * Insert 5 student records
