@@ -44,6 +44,30 @@
         return $student_records_array;
     }
 
+    /* Creates a html table, add each student record
+     * as a row and prints out the html table
+     * in one's browser of choice
+     */
+    function print_all_student_records($student_records_array)
+    {
+        $column_headers = array_keys($student_records_array[0]);
+
+        echo '<table border="2"><thead><tr>';
+        foreach($column_headers as $column_header) {
+            echo '<th>'.$column_header.'</th>';
+        }
+        echo '</tr></thead><tbody>';
+
+        foreach($student_records_array as $student_record) {
+            echo '<tr>';
+            foreach($column_headers as $column_header) {
+                echo '<td>'.$student_record[$column_header].'</td>';
+            }
+            echo '</tr>';
+        }
+        echo '</tbody></table>';
+    }
+
     // Execution of this program begins here
     function main()
     {
@@ -56,4 +80,5 @@
         $student_records_array = get_student_records($db_connection_info);
     }
     main();
+
 
