@@ -20,3 +20,11 @@ sudo apt-get -y install zip
 sudo apt-get -y install unzip
 sudo apt-get -y install curl
 
+# Installs php and all the
+# required modules
+sudo apt-get -y install php
+sudo apt-get -y install libapache2-mod-php
+sudo apt-get -y install php-xml
+sudo apt-get -y install php-curl
+sudo apt-get -y install php-mysql
+
