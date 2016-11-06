@@ -33,4 +33,16 @@ aws rds create-db-instance --engine "$db_engine" --db-instance-class "$db_instan
 # become available
 aws rds wait db-instance-available --db-instance-identifier "$db_instance_identifier"
 
+# Values needed to create 
+# raw and finished 
+# buckets in S3
+raw_bucket_name=$2
+finish_bucket_name=$3
+region="us-west-2"
+
+aws s3 mb s3://$raw_bucket_name    --region $region > /dev/null 2>> "$log_file_name"
+aws s3 mb s3://$finish_bucket_name --region $region > /dev/null 2>> "$log_file_name"
+
+
+
 
