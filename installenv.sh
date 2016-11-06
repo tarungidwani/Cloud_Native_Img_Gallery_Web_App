@@ -10,13 +10,6 @@ repo_url=git@github.com:illinoistech-itm/tgidwani.git
 repo_tmp_location=/tmp/repo
 repo_files_locaiton=$repo_tmp_location/web-app/*
 
-# Update all repos and upgrade
-# all packages with available
-# updates
-sudo apt-get update
-sudo apt-get -y upgrade
-sudo apt-get -y dist-upgrade
-
 # Installs and starts
 # the apache2 web server
 sudo apt-get -y install apache2
