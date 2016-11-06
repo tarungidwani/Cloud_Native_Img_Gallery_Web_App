@@ -9,10 +9,6 @@
         $s3_client = new \Aws\S3\S3Client([
             'version' => 'latest',
             'region'  => "$region",
-            'credentials' => [
-                'key' => 'AKIAINSA32Q2CDCUR4OA',
-                'secret' => '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'
-            ]
         ]);
 
         try
