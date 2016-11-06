@@ -11,7 +11,7 @@
             return parse_ini_file($config_file_path);
         else
         {
-            echo sprintf($err_msg, $config_file_path);
+            echo $err_msg;
             exit(1);
         }
     }

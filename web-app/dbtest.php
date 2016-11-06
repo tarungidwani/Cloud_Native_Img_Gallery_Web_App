@@ -1,5 +1,6 @@
 <?php
 
+    require 'lib/config_reader.php';
     require 'lib/db_creation.php';
     require 'lib/generate_sql_queries.php';
 
@@ -73,7 +74,10 @@
     // Execution of this program begins here
     function main()
     {
-        $db_connection_info = read_info_from_db_config_file();
+        $db_config_file_path = constant('PATH_TO_DB_CONNECTION_INFO_FILE');
+        $err_msg = "Failed to connect to RDS instance, file $db_config_file_path does not exist";
+
+        $db_connection_info = read_info_from_config_file($db_config_file_path, $err_msg);
         $db_endpoint = get_db_endpoint($db_connection_info['region'],$db_connection_info['db_identifier']);
         $db_connection_info['db_endpoint'] = $db_endpoint;
 
