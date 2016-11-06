@@ -20,6 +20,19 @@ function delete_all_db_instances
 		done
 }
 
+# Deletes all S3 buckets and 
+# all the objects in each bucket
+function delete_all_s3_buckets
+{
+	all_s3_buckets=($(aws s3 ls | cut -d' ' -f3))
+	
+	for s3_bucket in "${all_s3_buckets[@]}"
+	do
+		aws s3 rm s3://$s3_bucket --recursive > /dev/null 2>> $log_file
+		aws s3 rb s3://$s3_bucket > /dev/null 2>> $log_file
+	done
+}
+
 # Deletes all auto scaling groups and terminates
 # all instances attached to it in the default
 # region
@@ -99,6 +112,10 @@ function destroy_env
 
 	printf "Deleting all DB instances in RDS........\n"
 	delete_all_db_instances
+	printf "Completed successfully!\n"
+
+	printf "Deleting all buckets in S3........\n"
+	delete_all_s3_buckets
 	printf "Completed successfully!\n"
 
 	printf "Deleting all auto-scaling-groups.........\n"
