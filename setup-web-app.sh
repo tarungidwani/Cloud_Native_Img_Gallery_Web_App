@@ -62,17 +62,20 @@ function create_app_infra
 
 function create_env
 {
-	local $ami_id="ami-9cb313fc"
-	local $key_name=$1
+	local ami_id="ami-9cb313fc"
+	local key_name="$1"
+	local iam_profile="$2"
 
 	printf "\n Creating env: LC, ASG, and LB\n"
-	./create-env.sh "$ami_id" "$key_name" "$ec2_security_group"
+	./create-env.sh "$ami_id" "$key_name" "$ec2_security_group" "$iam_profile"
 	printf "Completed Successfully\n"
 }
 
-if [ $# -ne 1 ]
+if [ $# -ne 2 ]
 then
-	printf "\n**Please provide a valid key-name as an argument to this script**\n"
+	printf "\n***\nPlease provide the following 2 arguments in the given order:\n\n"
+	printf " 1. Key Name\n 2. IAM Role Name, with PowerUserAccess policy set\n"
+	printf "***\n\n"
 	exit 1
 fi
 
@@ -87,5 +90,5 @@ create_rds_sec_group
 
 create_app_infra
 
-create_env
+create_env "$1" "$2"
 
