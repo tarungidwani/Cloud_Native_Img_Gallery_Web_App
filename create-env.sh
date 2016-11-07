@@ -57,7 +57,7 @@ aws autoscaling create-auto-scaling-group --launch-configuration-name "$launch_c
 # instances of the autoscaling group to become running.
 
 # asg_instance_ids=`aws autoscaling describe-auto-scaling-groups 
-#--auto-scaling-group-names  "bootstrap-website-asg" 
+#--auto-scaling-group-names  "web-app-asg" 
 # --query AutoScalingGroups[].Instances[].InstanceId --output "text"`
 
 # Waits for all instances in auto-scaling-group to spawn and become running
@@ -78,7 +78,7 @@ aws autoscaling attach-load-balancers --auto-scaling-group-name "$auto_scaling_g
 --load-balancer-names "$load_balancer_name" 2> log.txt
 
 printf "\n"
-printf "Load-balancer-url to SAT NextGen bootstrap website: $lb_dns_name\n\n"
+printf "Load-balancer-url to web-app: $lb_dns_name\n\n"
 printf "**May have to wait 2-5 mins for the following to complete:\n"
 printf "\t1. Instances of autoscaling group to become running\n"
 printf "\t2. Initialization of these instances with the specified user-data script provided\n"
