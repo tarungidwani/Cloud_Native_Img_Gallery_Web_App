@@ -7,10 +7,10 @@
 
 # Checks if the user specified the 3 
 # required arguments to this script
-if [ $# -ne 3 ]
+if [ $# -ne 4 ]
 then
 	printf "\n***\nPlease provide the following 3 arguments in the given order:\n\n"
-	printf " 1. AMI ID\n 2. key-name\n 3. security-group\n"
+	printf " 1. AMI ID\n 2. key-name\n 3. security-group\n 4. iam-profile\n"
 	printf "***\n\n"
 	exit 1
 fi
@@ -19,6 +19,7 @@ fi
 instance_ami="$1"
 key_name="$2"
 security_group_name="$3"
+iam_profile="$4"
 launch_configuration_name="web-app-lc"
 # No use for number of
 # instances to launch as I am
@@ -30,7 +31,7 @@ instance_user_data="file://installenv.sh"
 # Creates a new launch configuration with the name web-app-lc
 aws autoscaling create-launch-configuration --image-id "$instance_ami" --instance-type "$instance_type" \
 --launch-configuration-name "$launch_configuration_name" --user-data "$instance_user_data" \
---security-groups "$security_group_name" --key-name "$key_name" 2> log.txt
+--security-groups "$security_group_name" --key-name "$key_name" --iam-instance-profile "$iam_profile" 2>> log.txt
 
 # Variables for creating autoscaling-group
 auto_scaling_group_name="web-app-asg"
@@ -40,7 +41,7 @@ instance_zone="us-west-2b"
 # Creates a new auto scaling group with the name web-app-asg
 aws autoscaling create-auto-scaling-group --launch-configuration-name "$launch_configuration_name" \
 --auto-scaling-group-name "$auto_scaling_group_name" --desired-capacity "$desired_capacity" \
---min-size "$desired_capacity" --max-size "$desired_capacity" --availability-zones "$instance_zone" 2> log.txt
+--min-size "$desired_capacity" --max-size "$desired_capacity" --availability-zones "$instance_zone" 2>> log.txt
 
 # ** Unable to wait for instances of the auto-scaling-group created 
 #    above to become running because after running the create-auto-scaling-group 
@@ -71,11 +72,11 @@ sec_group_id=$(aws ec2 describe-security-groups --group-name $security_group_nam
 
 # Creates a new classic load balancer with the name web-app-lb
 lb_dns_name=$(aws elb create-load-balancer --load-balancer-name "$load_balancer_name" --availability-zones "$instance_zone" \
---listeners "$lb_listener" --security-groups "$sec_group_id" --output "text" 2> log.txt)
+--listeners "$lb_listener" --security-groups "$sec_group_id" --output "text" 2>> log.txt)
 
 # Attaches load balancer: web-app-lb to autoscaling group: web-app-asg
 aws autoscaling attach-load-balancers --auto-scaling-group-name "$auto_scaling_group_name" \
---load-balancer-names "$load_balancer_name" 2> log.txt
+--load-balancer-names "$load_balancer_name" 2>> log.txt
 
 printf "\n"
 printf "Load-balancer-url to web-app: $lb_dns_name\n\n"
