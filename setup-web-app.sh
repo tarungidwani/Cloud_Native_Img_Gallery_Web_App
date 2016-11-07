@@ -73,6 +73,7 @@ function create_env
 if [ $# -ne 1 ]
 then
 	printf "\n**Please provide a valid key-name as an argument to this script**\n"
+	exit 1
 fi
 
 # Destroy all existing infrastructure
