@@ -62,10 +62,18 @@ function create_app_infra
 
 function create_env
 {
-	
+	local $ami_id="ami-9cb313fc"
+	local $key_name=$1
+
+	printf "\n Creating env: LC, ASG, and LB\n"
+	./create-env.sh "$ami_id" "$key_name" "$ec2_security_group"
+	printf "Completed Successfully\n"
 }
 
-
+if [ $# -ne 1 ]
+then
+	printf "\n**Please provide a valid key-name as an argument to this script**\n"
+fi
 
 # Destroy all existing infrastructure
 # before begining setup of infra and
@@ -78,5 +86,5 @@ create_rds_sec_group
 
 create_app_infra
 
-
+create_env
 
