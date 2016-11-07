@@ -18,7 +18,7 @@ db_instance_identifier="web-app-db"
 db_master_username="root"
 db_master_user_password="TestMikeTest!"
 availability_zone="us-west-2b"
-security_group_id="sg-7a9cff03"
+security_group_id=$1
 db_name="webapp"
 
 # Creates a MariaDB instance within RDS
