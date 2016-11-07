@@ -45,6 +45,21 @@ function create_rds_sec_group
 	printf "Completed Successfully\n"
 }
 
+# Creates a MariaDB RDS instance
+# Creates two S3 buckets: raw and
+# finished
+function create_app_infra
+{
+	local rds_sec_group_id=$(aws ec2 describe-security-groups --group-name $rds_security_group \
+																													  --query SecurityGroups[*].GroupId --output text)
+	local raw_s3_bucket="raw-tng"
+	local finished_s3_bucket="finished-tng"
+
+	printf "\nCreating env for app: RDS instance (MariaDB) and S3 buckets\n"
+	./create-app-env.sh "$rds_sec_group_id" "$raw_s3_bucket" "$finished_s3_bucket"
+	printf "Completed Successfully\n"
+}
+
 # Destroy all existing infrastructure
 # before begining setup of infra and
 # web app
@@ -53,4 +68,6 @@ function create_rds_sec_group
 create_ec2_sec_group
 
 create_rds_sec_group
+
+create_app_infra
 
