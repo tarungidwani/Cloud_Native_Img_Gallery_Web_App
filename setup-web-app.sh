@@ -60,6 +60,13 @@ function create_app_infra
 	printf "Completed Successfully\n"
 }
 
+function create_env
+{
+	
+}
+
+
+
 # Destroy all existing infrastructure
 # before begining setup of infra and
 # web app
@@ -70,4 +77,6 @@ create_ec2_sec_group
 create_rds_sec_group
 
 create_app_infra
+
+
 
