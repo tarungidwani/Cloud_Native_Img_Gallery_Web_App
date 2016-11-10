@@ -13,4 +13,9 @@ then
 	exit 1;
 fi
 
+mysql -h "$host" -u "$db_username" -p"$db_password" << EOF 
 
+	CREATE DATABASE IF NOT EXISTS $db_name;
+	USE $db_name;
+
+EOF
