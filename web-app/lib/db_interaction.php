@@ -1,5 +1,5 @@
 <?php
-//Failed to connect to RDS instance: file '$db_connection_file_path' does not exist\n"
+    
    require dirname(__DIR__) . '/aws_sdk/aws-autoloader.php';
 
     /* Querys AWS's RDS to get the endpoint of the DB instance
