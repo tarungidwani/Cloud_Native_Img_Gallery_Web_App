@@ -17,7 +17,7 @@ table_name_1="jobs"
 if [ $# != 3 ]
 then
 	printf "\n**\nPlease provide the following parameters:\n"
-	printf "	1.URL to DB instance endpoint\n	2. User name of DB instance\n	3. Password of DB instance\n**\n\n"
+	printf " 1. URL to DB instance endpoint\n 2. User name of DB instance\n 3. Password of DB instance\n**\n\n"
 	exit 1;
 fi
 
