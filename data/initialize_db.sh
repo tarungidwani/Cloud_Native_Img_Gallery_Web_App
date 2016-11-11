@@ -1,8 +1,8 @@
 #!/bin/bash
 
 host="$1"
-db_username="root"
-db_password="TestMikeTest!"
+db_username="$2"
+db_password="$3"
 
 db_name="gallery"
 table_name="user_logins"
@@ -14,9 +14,10 @@ password_3=($(md5sum <<< 'LetMeInController'))
 
 table_name_1="jobs"
 
-if [ $# != 1 ]
+if [ $# != 3 ]
 then
-	printf "\n**Please provide url to DB instance endpoint**\n\n"
+	printf "\n**\nPlease provide the following parameters:\n"
+	printf "	1.URL to DB instance endpoint\n	2. User name of DB instance\n	3. Password of DB instance\n**\n\n"
 	exit 1;
 fi
 
