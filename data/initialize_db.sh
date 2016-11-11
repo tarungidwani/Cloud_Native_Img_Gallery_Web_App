@@ -7,6 +7,11 @@ db_password="TestMikeTest!"
 db_name="gallery"
 table_name="user_logins"
 
+# Hashed passwords of the users
+password_1=$(md5sum <<< 'LetMeInTarun')
+password_2=$(md5sum <<< 'LetMeInJeremy')
+password_3=$(md5sum <<< 'LetMeInController')
+
 if [ $# != 1 ]
 then
 	printf "\n**Please provide url to DB instance endpoint**\n\n"
