@@ -54,7 +54,10 @@ mysql -h "$host" -u "$db_username" -p"$db_password" 2>> db_initialize.txt << EOF
 		s3_raw_url VARCHAR(2083) NOT NULL,
 		s3_finished_url VARCHAR(2083),
 		status ENUM('0','1') NOT NULL,
-		reciept VARCHAR(32) NOT NULL
+		reciept VARCHAR(32) NOT NULL,
+		FOREIGN KEY (user_login_id)
+				REFERENCES $table_name(id)
+				ON DELETE CASCADE
 	);
 
 EOF
