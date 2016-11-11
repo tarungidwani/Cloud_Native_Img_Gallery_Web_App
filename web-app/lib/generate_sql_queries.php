@@ -1,18 +1,5 @@
 <?php
 
-    function create_students_table_query($db_name, $table_name)
-    {
-        return <<<SQL
-    CREATE TABLE IF NOT EXISTS $db_name.$table_name
-    (
-      ID INT AUTO_INCREMENT PRIMARY KEY,
-      Name VARCHAR(255) NOT NULL,
-      Age INT(3) NOT NULL,
-      UNIQUE (Name, Age)
-    );
-SQL;
-    }
-
     function create_insert_student_records_query($db_name, $table_name)
     {
         return <<<SQL
