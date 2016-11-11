@@ -22,6 +22,9 @@ fi
 
 mysql -h "$host" -u "$db_username" -p"$db_password" 2>> db_initialize.txt << EOF 
 
+	/* Drops a DB if it exists */
+	DROP DATABASE IF EXISTS $db_name;
+
 	/* Creates a database */
 	CREATE DATABASE IF NOT EXISTS $db_name;
 	USE $db_name;
