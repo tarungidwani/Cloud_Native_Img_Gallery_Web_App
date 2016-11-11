@@ -27,8 +27,10 @@ mysql -h "$host" -u "$db_username" -p"$db_password" 2>> db_initialize.txt << EOF
 	/* Creates a table */
 	CREATE TABLE IF NOT EXISTS $table_name
 	(
-		user_name VARCHAR(255) PRIMARY KEY,
-		password VARCHAR(255) NOT NULL
+		id INT PRIMARY KEY AUTO_INCREMENT,
+		user_name VARCHAR(255) NOT NULL,
+		password VARCHAR(255) NOT NULL,
+		CONSTRAINT UNIQUE (user_name)
 	);
 
 	/* Insert user login records */
