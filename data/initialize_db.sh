@@ -31,4 +31,11 @@ mysql -h "$host" -u "$db_username" -p"$db_password" 2>> db_initialize.txt << EOF
 		password VARCHAR(255) NOT NULL
 	);
 
+	/* Insert user login records */
+	INSERT INTO $table_name (user_name, password)
+	VALUES 
+	('tgidwani@hawk.iit.edu', "$password_1"),
+	('hajek@iit.edu'        , "$password_2"),
+	('controller'           , "$password_3")
+
 EOF
