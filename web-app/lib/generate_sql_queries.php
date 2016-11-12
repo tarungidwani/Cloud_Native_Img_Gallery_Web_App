@@ -4,3 +4,8 @@
     {
         return "SELECT * FROM $db_name.$table_name ORDER BY ID";
     }
+
+    function create_select_all_by_user_email($db_name, $table_name, $value)
+    {
+        return "SELECT * FROM $db_name.$table_name where user_name = \"$value\"";
+    }
