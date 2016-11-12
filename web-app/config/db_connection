@@ -1,4 +1,7 @@
 db_identifier = "web-app-db"
 db_username = "root"
 db_password = "TestMikeTest!"
+db_name = "gallery"
+table_name_users = "user_logins"
+table_name_jobs = "jobs"
 region = "us-west-2"
