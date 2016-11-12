@@ -12,6 +12,7 @@
     {
         $user_credentials = get_user_credentials_from_db();
         $_SESSION['user_login_id'] = $user_credentials['id'];
+        $user_entered_username == "controller" ? $_SESSION['is_admin'] = true : $_SESSION['is_admin'] = false;
 
         if( $user_entered_username == $user_credentials['user_name']  &&
             $user_entered_password == $user_credentials['password'] )
