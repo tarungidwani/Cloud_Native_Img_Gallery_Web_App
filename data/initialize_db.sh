@@ -8,9 +8,9 @@ db_name="gallery"
 table_name="user_logins"
 
 # Hashed passwords of the users
-password_1=($(md5sum <<< 'LetMeInTarun'))
-password_2=($(md5sum <<< 'LetMeInJeremy'))
-password_3=($(md5sum <<< 'LetMeInController'))
+password_1=($(printf "%s" 'LetMeInTarun'      | md5sum))
+password_2=($(printf "%s" 'LetMeInJeremy'     | md5sum))
+password_3=($(printf "%s" 'LetMeInController' | md5sum))
 
 table_name_1="jobs"
 
