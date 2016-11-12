@@ -6,6 +6,23 @@
         session_destroy();
         session_start();
     }
+
+    /* Verifies user entered credentials
+     * and redirects to welcome page on
+     * success or displays error msg
+     * on failure
+     */
+    if($_SERVER["REQUEST_METHOD"] == "POST")
+    {
+        $_SESSION['user_name'] = $_POST['user_name'];
+        $user_entered_password = md5($_POST['password']);
+        $are_credentials_valid = are_user_credentials_valid($_POST['user_name'], $user_entered_password);
+
+        if($are_credentials_valid)
+           header('Location: pages/welcome.php');
+        else
+            print "<h3 style='padding-left: 478px; padding-top: 320px'>Error: Invalid login credentials!</h3>";
+    }
 ?>
 
 <!DOCTYPE html>
