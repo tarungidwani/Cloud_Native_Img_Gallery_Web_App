@@ -11,6 +11,7 @@
     function are_user_credentials_valid($user_entered_username,$user_entered_password)
     {
         $user_credentials = get_user_credentials_from_db();
+        $_SESSION['user_login_id'] = $user_credentials['id'];
 
         if( $user_entered_username == $user_credentials['user_name']  &&
             $user_entered_password == $user_credentials['password'] )
