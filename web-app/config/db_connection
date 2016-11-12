@@ -1,6 +1,4 @@
 db_identifier = "web-app-db"
 db_username = "root"
 db_password = "TestMikeTest!"
-db_name = "school"
-table_name = "students"
 region = "us-west-2"
