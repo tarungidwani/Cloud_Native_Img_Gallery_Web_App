@@ -8,10 +8,8 @@
      * match the username and password
      * stored in the user logins DB
      */
-    function are_user_credentials_valid()
+    function are_user_credentials_valid($user_entered_username,$user_entered_password)
     {
-        $user_entered_username = $_SESSION['user_name'];
-        $user_entered_password = $_SESSION['password'];
         $user_credentials = get_user_credentials_from_db();
 
         if( $user_entered_username == $user_credentials['user_name']  &&
