@@ -1,3 +1,13 @@
+<?php
+    require 'lib/authenticate_user.php';
+
+    if (session_status() == PHP_SESSION_NONE)
+    {
+        session_destroy();
+        session_start();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
