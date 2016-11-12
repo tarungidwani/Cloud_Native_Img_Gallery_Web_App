@@ -3,6 +3,24 @@
     require 'generate_sql_queries.php';
     require 'db_interaction.php';
 
+    /* Checks to ensure that the user
+     * entered username and password
+     * match the username and password
+     * stored in the user logins DB
+     */
+    function are_user_credentials_valid()
+    {
+        $user_entered_username = $_SESSION['user_name'];
+        $user_entered_password = $_SESSION['password'];
+        $user_credentials = get_user_credentials_from_db();
+
+        if( $user_entered_username == $user_credentials['user_name']  &&
+            $user_entered_password == $user_credentials['password'] )
+            return true;
+        else
+            return false;
+    }
+
     /* Querys and brigs together
      * all the information needed
      * to connect to the app DB
