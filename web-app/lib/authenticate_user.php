@@ -20,3 +20,21 @@
 
         return $db_connection_info;
     }
+
+    /* Gets a user's login info
+     * from DB based on the
+     * specified username
+     */
+    function get_user_credentials_from_db()
+    {
+        $db_connection_info = setup_db_info();
+        $db_name = $db_connection_info['db_name'];
+        $table_name = $db_connection_info['table_name_users'];
+        $username = $_SESSION['user_name'];
+        $query = create_select_all_by_user_email($db_name, $table_name, $username);
+
+        $err_msg = "Failed to get user login information in table $table_name in db $db_name";
+        $user_login_info = execute_query($db_connection_info, $query, $err_msg)[0];
+
+        return $user_login_info;
+    }
