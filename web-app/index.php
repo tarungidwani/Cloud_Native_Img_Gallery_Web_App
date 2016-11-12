@@ -19,7 +19,11 @@
         $are_credentials_valid = are_user_credentials_valid($_POST['user_name'], $user_entered_password);
 
         if($are_credentials_valid)
-           header('Location: pages/welcome.php');
+        {
+            $_SESSION['client_token'] = md5(uniqid());
+            header('Location: pages/welcome.php');
+        }
+
         else
             print "<h3 style='padding-left: 478px; padding-top: 320px'>Error: Invalid login credentials!</h3>";
     }
