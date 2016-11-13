@@ -12,22 +12,22 @@ repo_files_locaiton=$repo_tmp_location/web-app/*
 
 # Installs and starts
 # the apache2 web server
-sudo apt-get -y install apache2
+run-one-until-success sudo apt-get -y install apache2
 sudo service apache2 start
 
 # Installs all tools needed
 # to install and setup php
-sudo apt-get -y install zip
-sudo apt-get -y install unzip
-sudo apt-get -y install curl
+run-one-until-success sudo apt-get -y install zip
+run-one-until-success sudo apt-get -y install unzip
+run-one-until-success sudo apt-get -y install curl
 
 # Installs php and all the
 # required modules
-sudo apt-get -y install php
-sudo apt-get -y install libapache2-mod-php
-sudo apt-get -y install php-xml
-sudo apt-get -y install php-curl
-sudo apt-get -y install php-mysql
+run-one-until-success sudo apt-get -y install php
+run-one-until-success sudo apt-get -y install libapache2-mod-php
+run-one-until-success sudo apt-get -y install php-xml
+run-one-until-success sudo apt-get -y install php-curl
+run-one-until-success sudo apt-get -y install php-mysql
 
 # Installs and setups AWS SDK
 # for PHP
@@ -36,7 +36,7 @@ sudo wget -O "$aws_sdk_tmp_location" "$aws_sdk_url"
 sudo unzip "$aws_sdk_tmp_location" -d "$aws_sdk_location"
 
 # Install and setup web-app
-sudo apt-get -y install git
+run-one-until-success sudo apt-get -y install git
 sudo git clone "$repo_url" "$repo_tmp_location"
 sudo cp -r $repo_files_locaiton "$apache_file_location"
 
