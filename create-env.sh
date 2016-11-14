@@ -74,6 +74,21 @@ sec_group_id=$(aws ec2 describe-security-groups --group-name $security_group_nam
 lb_dns_name=$(aws elb create-load-balancer --load-balancer-name "$load_balancer_name" --availability-zones "$instance_zone" \
 --listeners "$lb_listener" --security-groups "$sec_group_id" --output "text" 2>> log.txt)
 
+# Variables for creating and setting 
+# a sitcky session cookie policy to 
+# a classic load balancer
+sticky_session_policy_name="users-web-app-session"
+load_balancer_port="80"
+
+# Creates a sticky session cookie (ensures that all requests from the user 
+# during the life of the browser session are sent to the same instance) 
+aws elb create-lb-cookie-stickiness-policy --load-balancer-name "$load_balancer_name" --policy-name "$sticky_session_policy_name"
+
+# Sets a sticky session cookie policy 
+# for the specified classic load balancer
+aws elb set-load-balancer-policies-of-listener --load-balancer-name "$load_balancer_name" --load-balancer-port "$load_balancer_port" \
+                                               --policy-names "$sticky_session_policy_name"
+
 # Attaches load balancer: web-app-lb to autoscaling group: web-app-asg
 aws autoscaling attach-load-balancers --auto-scaling-group-name "$auto_scaling_group_name" \
 --load-balancer-names "$load_balancer_name" 2>> log.txt
