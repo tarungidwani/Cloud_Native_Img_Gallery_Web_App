@@ -13,6 +13,7 @@ password_2=($(printf "%s" 'LetMeInJeremy'     | md5sum))
 password_3=($(printf "%s" 'LetMeInController' | md5sum))
 
 table_name_1="jobs"
+table_name_2="feature_status"
 
 if [ $# != 3 ]
 then
@@ -60,5 +61,17 @@ mysql -h "$host" -u "$db_username" -p"$db_password" 2>> db_initialize.txt << EOF
 				REFERENCES $table_name(id)
 				ON DELETE CASCADE
 	);
+
+	/* Creates a table */
+	CREATE TABLE IF NOT EXISTS $table_name_2
+	(
+		feature VARCHAR(50) PRIMARY KEY,
+		status INT NOT NULL
+	);
+
+	/* Inserts status for feature */
+	INSERT INTO $table_name_2 (feature, status)
+	VALUES
+	('upload', 1);
 
 EOF
