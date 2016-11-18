@@ -1,14 +1,10 @@
 <?php
 
     session_start();
-    $features = ["<li><a href=\"gallery.php\">Gallery</a></li>",
-                 "<li><a href=\"upload.php\">Upload</a></li>"];
+    require 'menu.php';
 
     if($_SESSION['client_token'] == null)
         header('location: ../index.php');
-
-    if($_SESSION['is_admin'])
-        $features[] = "<li><a href=\"admin.php\">Admin</a></li>";
 ?>
 
 <!DOCTYPE html>
@@ -18,11 +14,5 @@
     <title>Welcome</title>
 </head>
 <body>
-<ul>
-    <?php
-    foreach($features as $feature)
-        print "$feature";
-    ?>
-</ul>
 </body>
 </html>
