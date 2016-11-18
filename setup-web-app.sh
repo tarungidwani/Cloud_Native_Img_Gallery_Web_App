@@ -1,5 +1,10 @@
 #!/bin/bash
 
+function install_dependencies
+{
+	sudo apt-get -y install mysql-client &> /dev/null 
+}
+
 ec2_security_group="gallery-web-app-sec-group"
 rds_security_group="gallery-web-app-db-sec-group"
 
@@ -83,6 +88,8 @@ fi
 # before begining setup of infra and
 # web app
 ./destroy-env.sh
+
+install_dependencies
 
 create_ec2_sec_group
 
