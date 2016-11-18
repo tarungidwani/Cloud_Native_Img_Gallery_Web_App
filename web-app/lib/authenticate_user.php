@@ -1,5 +1,5 @@
 <?php
-    require 'config_reader.php';
+
     require 'generate_sql_queries.php';
     require 'db_interaction.php';
 
