@@ -9,3 +9,9 @@
     {
         return "SELECT * FROM $db_name.$table_name where user_name = \"$value\"";
     }
+
+    function create_select_by_feature_name($db_name, $table_name, $feature_name)
+    {
+        return "SELECT * FROM $db_name.$table_name where feature = \"$feature_name\"";
+    }
+    
