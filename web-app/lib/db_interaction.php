@@ -13,6 +13,10 @@
         $rds_client = new \Aws\Rds\RdsClient([
             'version' => 'latest',
             'region'  => "$region",
+            'credentials' => array(
+                'key'    => 'AKIAIH3COTKEJKTFJT7Q',
+                'secret' => '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',
+            )
         ]);
 
         try
@@ -27,6 +31,24 @@
             echo "RDS instance $db_identifier does not exist, please create required instance by running the create-app-env.sh script\n";
             exit(1);
         }
+    }
+
+    /* Querys and brings together
+     * all the information needed
+     * to connect to the app DB
+     * and execute a query
+     */
+    function setup_db_info()
+    {
+        $db_connection_file_path = dirname(__DIR__) . '/config/db_connection';
+        $err_msg = "Failed to read db_connection file, please try again later";
+        $db_connection_info = read_info_from_config_file($db_connection_file_path, $err_msg);
+
+        $db_region = $db_connection_info['region'];
+        $db_identifier = $db_connection_info['db_identifier'];
+        $db_connection_info['db_endpoint'] = get_db_endpoint($db_region, $db_identifier);
+
+        return $db_connection_info;
     }
 
     /* Executes any create or insert query based on the
