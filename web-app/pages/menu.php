@@ -24,10 +24,3 @@
         print "$feature";
     ?>
 </ul>
-
-
-
-
-
-
-
