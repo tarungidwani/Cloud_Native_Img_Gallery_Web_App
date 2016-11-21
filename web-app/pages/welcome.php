@@ -1,10 +1,6 @@
 <?php
-
-    session_start();
+    require 'init.php';
     require 'menu.php';
-
-    if($_SESSION['client_token'] == null)
-        header('location: ../index.php');
 ?>
 
 <!DOCTYPE html>
