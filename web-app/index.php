@@ -1,11 +1,10 @@
 <?php
     require 'lib/authenticate_user.php';
 
-    if (session_status() == PHP_SESSION_NONE)
-    {
+    if (session_status() != PHP_SESSION_NONE)
         session_destroy();
-        session_start();
-    }
+
+    session_start();
 
     /* Verifies user entered credentials
      * and redirects to welcome page on
