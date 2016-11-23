@@ -29,7 +29,7 @@
     /* Sends a message to the
      * specified queue
      */
-    function send_message_to_queue($queue_url, $message_body, $region)
+    function send_message_to_queue($queue_url, $message_body, $region, $queue_name)
     {
         $sqs_client = new Aws\Sqs\SqsClient([
             'version' => 'latest',
@@ -45,7 +45,7 @@
         }
         catch(\Aws\Sqs\Exception\SqsException $sqs_exception)
         {
-            echo "Failed to send message to queue: $queue_url, " . $sqs_exception->getMessage() . "\n";
+            echo "Failed to send message to queue: $queue_name, " . $sqs_exception->getMessage() . "\n";
             exit(1);
         }
     }
