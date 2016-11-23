@@ -49,6 +49,36 @@
         return $stmt;
     }
 
+    function record_raw_image_job($db_connection_info, $s3_raw_url)
+    {
+        $db_endpoint = $db_connection_info['db_endpoint'];
+        $db_username = $db_connection_info['db_username'];
+        $db_password = $db_connection_info['db_password'];
+        $db_name = $db_connection_info['db_name'];
+        $mysql_connection = new mysqli($db_endpoint, $db_username, $db_password, $db_name);
+
+        if(!$mysql_connection->connect_errno)
+        {
+            $insert_raw_img_record_stmt       = setup_prepared_statement($mysql_connection, $db_connection_info['table_name_jobs']);
+            $insert_raw_img_record_stmt_bound = bind_params_to_prepared_stmt($insert_raw_img_record_stmt, $s3_raw_url);
+            $result = $insert_raw_img_record_stmt_bound->execute();
+
+            if(!$result)
+            {
+                echo "Failed to insert raw img job record (*Execution failed: " . $insert_raw_img_record_stmt_bound->error . "*)";
+                exit(1);
+            }
+            else
+                echo "Job successfully submitted, once complete you will receive a notification at: " . $_SESSION['user_name'];
+        }
+        else
+        {
+            echo "Failed to connect to RDS instance: $db_connection_info[db_endpoint]\n";
+            $mysql_connection->close();
+            exit(1);
+        }
+    }
+
     function submit_job()
     {
         $s3_info = read_info_from_config_file(constant("S3_CONFIG_PATH"),"Failed to read S3 config file");
