@@ -1,8 +1,8 @@
 <?php
-
     require 'init.php';
     require 'menu.php';
-    require "../lib/s3_interaction.php";
+    require dirname(__DIR__) . '/lib/s3_interaction.php';
+    include_once dirname(__DIR__) . '/lib/db_interaction.php';
 
     define("S3_CONFIG_PATH", "../config/s3_connection");
 
@@ -17,5 +17,9 @@
         return $raw_img_url;
     }
 
-    $s3_info = read_info_from_config_file(constant("S3_CONFIG_PATH"),"Failed to read S3 config file");
-    $raw_img_url = upload_raw_img_to_s3_bucket($s3_info);
+    function submit_job()
+    {
+        $s3_info = read_info_from_config_file(constant("S3_CONFIG_PATH"),"Failed to read S3 config file");
+        $raw_img_url = upload_raw_img_to_s3_bucket($s3_info);
+    }
+    submit_job();
