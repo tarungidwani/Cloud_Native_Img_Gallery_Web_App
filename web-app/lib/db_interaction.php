@@ -13,11 +13,7 @@
     {
         $rds_client = new \Aws\Rds\RdsClient([
             'version' => 'latest',
-            'region'  => "$region",
-            'credentials' => array(
-                'key'    => 'AKIAIH3COTKEJKTFJT7Q',
-                'secret' => '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',
-            )
+            'region'  => "$region"
         ]);
 
         try
