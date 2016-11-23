@@ -5,6 +5,8 @@
 # Purpose: Setups the backend env required
 #          by the application
 #					 -> RDS
+#					 -> S3
+#          -> SQS
 
 log_file_name="app-env-log.txt"
 
@@ -48,4 +50,12 @@ region="us-west-2"
 
 aws s3 mb s3://$raw_bucket_name    --region $region > /dev/null 2>> "$log_file_name"
 aws s3 mb s3://$finish_bucket_name --region $region > /dev/null 2>> "$log_file_name"
+
+# Values needed to create 
+# a queue in SQS
+queue_name="gallery_img_jobs"
+visibility_timeout=600
+
+gallery_img_jobs_queue_url=$(aws sqs create-queue --queue-name "$queue_name"  --attributes VisibilityTimeout=$visibility_timeout \
+                                                  --output text)
 
