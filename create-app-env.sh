@@ -59,5 +59,5 @@ visibility_timeout=600
 # Creates a simple queue
 # within SQS
 gallery_img_jobs_queue_url=$(aws sqs create-queue --queue-name "$queue_name"  --attributes VisibilityTimeout=$visibility_timeout \
-                                                  --output text)
+                                                  --output text --region $region)
 
