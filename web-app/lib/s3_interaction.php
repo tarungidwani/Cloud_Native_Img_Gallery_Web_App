@@ -1,5 +1,5 @@
 <?php
-    require dirname(__DIR__) . '/aws_sdk/aws-autoloader.php';
+    include_once dirname(__DIR__) . '/aws_sdk/aws-autoloader.php';
 
     /* Uploads a file to the specified
      * AWS S3 bucket
@@ -8,7 +8,7 @@
     {
         $s3_client = new \Aws\S3\S3Client([
             'version' => 'latest',
-            'region'  => "$region",
+            'region'  => "$region"
         ]);
 
         try
