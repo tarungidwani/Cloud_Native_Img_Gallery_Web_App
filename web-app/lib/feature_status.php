@@ -3,6 +3,19 @@
     require 'generate_sql_queries.php';
     require 'db_interaction.php';
 
+    /* Checks to ensure that the feature
+    * is enabled or disabled
+    */
+    function is_feature_enabled($feature_name)
+    {
+        $feature_status = get_feature_status($feature_name);
+
+        if($feature_status['status'])
+            return true;
+        else
+            return false;
+    }
+
     /* Gets the status of the
      * specified feature that
      * is stored in a DB table
