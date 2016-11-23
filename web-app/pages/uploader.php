@@ -83,5 +83,14 @@
     {
         $s3_info = read_info_from_config_file(constant("S3_CONFIG_PATH"),"Failed to read S3 config file");
         $raw_img_url = upload_raw_img_to_s3_bucket($s3_info);
+
+        if($raw_img_url == null || $raw_img_url == "")
+        {
+            echo "<p>Failed to upload img to raw bucket</p>";
+            exit(1);
+        }
+
+        $db_connection_info = setup_db_info();
+        record_raw_image_job($db_connection_info, $raw_img_url);
     }
     submit_job();
