@@ -3,8 +3,10 @@
     require 'menu.php';
     require dirname(__DIR__) . '/lib/s3_interaction.php';
     include_once dirname(__DIR__) . '/lib/db_interaction.php';
+    include_once dirname(__DIR__) . '/lib/sqs_interaction.php';
 
     define("S3_CONFIG_PATH", "../config/s3_connection");
+    define("SQS_CONFIG_PATH", "../config/sqs_connection");
 
     function upload_raw_img_to_s3_bucket($s3_info)
     {
@@ -68,8 +70,6 @@
                 echo "Failed to insert raw img job record (*Execution failed: " . $insert_raw_img_record_stmt_bound->error . "*)";
                 exit(1);
             }
-            else
-                echo "Job successfully submitted, once complete you will receive a notification at: " . $_SESSION['user_name'];
         }
         else
         {
@@ -92,5 +92,14 @@
 
         $db_connection_info = setup_db_info();
         record_raw_image_job($db_connection_info, $raw_img_url);
+
+        $sqs_connection_info = read_info_from_config_file(constant("SQS_CONFIG_PATH"),"Failed to read SQS config file");
+        $region = $sqs_connection_info['region'];
+        $queue_name = $sqs_connection_info['queue_name'];
+        $queue_url = get_queue_url($region, $queue_name);
+        $message_body = md5($raw_img_url);
+        send_message_to_queue($queue_url, $message_body, $region, $queue_name);
+
+        echo "Job successfully submitted, once complete you will receive a notification at: " . $_SESSION['user_name'];
     }
     submit_job();
