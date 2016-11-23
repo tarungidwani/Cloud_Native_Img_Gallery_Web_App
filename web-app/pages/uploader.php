@@ -17,6 +17,19 @@
         return $raw_img_url;
     }
 
+    function setup_prepared_statement($mysql_connection, $jobs_table_name)
+    {
+        $insert_raw_img_record_stmt = $mysql_connection->prepare("INSERT INTO $jobs_table_name VALUES (?,?,?,?,?,?,?)");
+
+        if(!$insert_raw_img_record_stmt)
+        {
+            echo "Failed to insert raw img job record (*Prepare failed: " . $mysql_connection->error . "*)";
+            $mysql_connection->close();
+            exit(1);
+        }
+        return $insert_raw_img_record_stmt;
+    }
+
     function submit_job()
     {
         $s3_info = read_info_from_config_file(constant("S3_CONFIG_PATH"),"Failed to read S3 config file");
