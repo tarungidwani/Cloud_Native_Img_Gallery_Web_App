@@ -60,7 +60,7 @@ function create_app_infra
 	local raw_s3_bucket="raw-tng"
 	local finished_s3_bucket="finished-tng"
 
-	printf "\nCreating env for app: RDS instance (MariaDB) and S3 buckets\n"
+	printf "\nCreating env for app: RDS instance (MariaDB), S3 buckets & Simple Queue\n"
 	./create-app-env.sh "$rds_sec_group_id" "$raw_s3_bucket" "$finished_s3_bucket"
 	printf "Completed Successfully\n"
 }
