@@ -33,6 +33,18 @@ function delete_all_s3_buckets
 	done
 }
 
+# Deletes all simple and 
+# fifo queues in SQS
+function delete_all_queues
+{
+	all_queue_urls=($(aws sqs list-queues --query QueueUrls[*] --output text))
+
+	for queue_url in "${all_queue_urls[@]}"
+	do
+		aws sqs delete-queue --queue-url "$queue_url"
+	done
+}
+
 # Deletes all auto scaling groups and terminates
 # all instances attached to it in the default
 # region
@@ -116,6 +128,10 @@ function destroy_env
 
 	printf "Deleting all buckets in S3........\n"
 	delete_all_s3_buckets
+	printf "Completed successfully!\n"
+
+	printf "Deleting all queues in SQS........\n"
+	delete_all_queues
 	printf "Completed successfully!\n"
 
 	printf "Deleting all auto-scaling-groups.........\n"
