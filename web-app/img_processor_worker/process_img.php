@@ -32,4 +32,27 @@
             exit(1);
         }
     }
+
+    function apply_watermark($raw_img_path)
+    {
+        ini_set('memory_limit','-1');
+        $raw_img = create_img_based_on_type($raw_img_path);
+        $stamp = imagecreatefrompng(constant("IITLOGOIMG"));
+        $stamp_img_x = imagesx($stamp);
+        $stamp_img_y = imagesy($stamp);
+        $margin_right  = 10;
+        $margin_bottom = 10;
+        $is_image_copy_successful = imagecopy($raw_img,$stamp,imagesx($raw_img) - $stamp_img_x -$margin_right, imagesy($raw_img) - $stamp_img_y -$margin_bottom, 0, 0, imagesx($stamp), imagesy($stamp));
+
+        if(!$is_image_copy_successful)
+        {
+            echo "Failed to apply IIT logo watermark to raw img: $raw_img_path";
+            exit(1);
+        }
+        $finished_img_path = constant("DESTDIR") . '/' . pathinfo($raw_img_path)['filename'] . '_finished.png';
+        imagepng($raw_img, $finished_img_path);
+        imagedestroy($raw_img);
+
+        return $finished_img_path;
+    }
     
