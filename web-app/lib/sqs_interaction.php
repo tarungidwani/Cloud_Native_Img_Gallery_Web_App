@@ -49,3 +49,25 @@
             exit(1);
         }
     }
+
+    function read_message_from_queue($queue_url, $region, $queue_name)
+    {
+        $sqs_client = new Aws\Sqs\SqsClient([
+            'version' => 'latest',
+            'region'  => "$region"
+        ]);
+
+        try
+        {
+            $sqs_msgs = $sqs_client->receiveMessage([
+                'QueueUrl' => $queue_url,
+                'MaxNumberOfMessages' => 10
+            ]);
+            return $sqs_msgs;
+        }
+        catch(\Aws\Sqs\Exception\SqsException $sqs_exception)
+        {
+            echo "Failed to read message to queue: $queue_name, " . $sqs_exception->getMessage() . "\n";
+            exit(1);
+        }
+    }
