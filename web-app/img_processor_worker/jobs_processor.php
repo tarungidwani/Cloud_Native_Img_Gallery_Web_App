@@ -22,6 +22,9 @@
     function process_job($job_to_process)
     {
         $finished_img_url = upload_finished_img_to_s3_bucket($job_to_process);
+        $job_to_process['s3_finished_url'] = $finished_img_url;
+
+        update_job_record_in_db($job_to_process);
     }
 
     function upload_finished_img_to_s3_bucket($job_to_process)
@@ -36,4 +39,18 @@
         $finished_img_url = submit_file_to_s3($finished_bucket_name, $finished_img_path, $region);
 
         return $finished_img_url;
+    }
+
+    function update_job_record_in_db($job_to_process)
+    {
+        $db_connection_info = setup_db_info();
+        $db_name = $db_connection_info['db_name'];
+        $table_name = $db_connection_info['table_name_jobs'];
+        $finished_img_url = $job_to_process['s3_finished_url'];
+        $status = '1';
+        $reciept = $job_to_process['reciept'];
+
+        $query_to_execute = "UPDATE $db_name.$table_name SET s3_finished_url = '$finished_img_url', status = '$status' where reciept = '$reciept'";
+        $err_msg = "Failed update job record with reciept: $reciept in $table_name in DB: $db_name";
+        execute_query($db_connection_info, $query_to_execute, $err_msg);
     }
