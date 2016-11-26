@@ -10,7 +10,11 @@
         $raw_img_dest_dir = constant("DESTDIR") . "/$raw_img_name";
 
         $is_copy_successful = copy($raw_img_url, $raw_img_dest_dir);
-
-        return $is_copy_successful;
+        if(!$is_copy_successful)
+        {
+            echo "Failed to download img: $raw_img_name from raw S3 bucket";
+            exit(1);
+        }
     }
+
     
