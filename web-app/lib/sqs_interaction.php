@@ -50,7 +50,7 @@
         }
     }
 
-    function read_message_from_queue($queue_url, $region, $queue_name)
+    function read_messages_from_queue($queue_url, $region, $queue_name)
     {
         $sqs_client = new Aws\Sqs\SqsClient([
             'version' => 'latest',
