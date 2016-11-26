@@ -11,7 +11,7 @@
 </head>
 <body>
 <form method="post" enctype="multipart/form-data">
-    <input type="file" accept="image/*"  name="img_path" style="padding-bottom: 20px;padding-top: 20px;" />
+    <input type="file" accept="image/png,image/jpeg"  name="img_path" style="padding-bottom: 20px;padding-top: 20px;" />
     <br>
     <input type="submit" value="Upload" formaction="uploader.php"/>
 </form>
