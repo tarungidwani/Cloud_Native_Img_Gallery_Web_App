@@ -55,4 +55,12 @@
 
         return $finished_img_path;
     }
+
+    function process_img($raw_img_url)
+    {
+        $raw_img_path      = download_img($raw_img_url);
+        $finished_img_path = apply_watermark($raw_img_path);
+
+        return $finished_img_path;
+    }
     
