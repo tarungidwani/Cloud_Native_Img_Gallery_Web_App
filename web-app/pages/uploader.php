@@ -79,6 +79,18 @@
         }
     }
 
+    function validate_image_file_type()
+    {
+        $img_file_type = $_FILES['img_path']['type'];
+
+        if($img_file_type != 'image/jpeg' && $img_file_type != 'image/png')
+        {
+            $_SESSION['invalid_img_type_err'] = "Invalid image type $img_file_type, please upload a jpg or png file to process";
+            header('Location: upload.php');
+            exit(1);
+        }
+    }
+
     function submit_job()
     {
         $s3_info = read_info_from_config_file(constant("S3_CONFIG_PATH"),"Failed to read S3 config file");
@@ -102,4 +114,6 @@
 
         echo "Job successfully submitted, once complete you will receive a notification at: " . $_SESSION['user_name'];
     }
+
+    validate_image_file_type();
     submit_job();
