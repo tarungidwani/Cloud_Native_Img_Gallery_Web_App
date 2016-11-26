@@ -1,10 +1,12 @@
 <?php
     require dirname(__DIR__) . '/lib/db_interaction.php';
     require 'process_img.php';
-    require dirname(__DIR__) . '/lib/config_reader.php';
+    include_once dirname(__DIR__) . '/lib/config_reader.php';
     require dirname(__DIR__) . '/lib/s3_interaction.php';
+    require dirname(__DIR__) . '/lib/sqs_interaction.php';
 
     define("S3CONFIGPATH", dirname(__DIR__) . '/config/s3_connection');
+    define("SQSCONFIGPATH", dirname(__DIR__) . '/config/sqs_connection');
 
     function get_job_to_process($reciept)
     {
