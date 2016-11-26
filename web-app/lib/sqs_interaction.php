@@ -50,6 +50,10 @@
         }
     }
 
+    /* Reads at most 10 msgs at
+     * a time from the specified
+     * queue
+     */
     function read_messages_from_queue($queue_url, $region, $queue_name)
     {
         $sqs_client = new Aws\Sqs\SqsClient([
