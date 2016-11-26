@@ -21,6 +21,11 @@
 
     function process_job($job_to_process)
     {
+        $finished_img_url = upload_finished_img_to_s3_bucket($job_to_process);
+    }
+
+    function upload_finished_img_to_s3_bucket($job_to_process)
+    {
         $err_msg = "Failed to read S3 config file";
         $s3_connection_info = read_info_from_config_file(constant("S3CONFIGPATH"), $err_msg);
         $raw_img_url = $job_to_process['s3_raw_url'];
@@ -30,4 +35,5 @@
 
         $finished_img_url = submit_file_to_s3($finished_bucket_name, $finished_img_path, $region);
 
+        return $finished_img_url;
     }
