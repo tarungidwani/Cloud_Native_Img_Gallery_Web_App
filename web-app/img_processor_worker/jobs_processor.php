@@ -59,6 +59,11 @@
 
     function process_all_jobs()
     {
-        
+        $err_msg = "Failed to read SQS config file";
+        $sqs_connection_info = read_info_from_config_file(constant("SQSCONFIGPATH"),$err_msg);
+        $region = $sqs_connection_info['region'];
+        $queue_name = $sqs_connection_info['queue_name'];
+        $queue_url = get_queue_url($region, $queue_name);
+
     }
     process_all_jobs();
