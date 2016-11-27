@@ -9,6 +9,9 @@ repo_url=git@github.com:illinoistech-itm/tgidwani.git
 repo_tmp_location=/tmp/repo
 repo_files_locaiton=$repo_tmp_location/web-app/*
 
+job_processor_script=$web_app_dir/img_processor_worker/jobs_processor.php
+user_to_run_as="ubuntu"
+
 # Installs all tools needed
 # to install and setup php
 run-one-until-success sudo apt-get -y install zip
@@ -33,4 +36,10 @@ sudo unzip "$aws_sdk_tmp_location" -d "$aws_sdk_location"
 run-one-until-success sudo apt-get -y install git
 sudo git clone "$repo_url" "$repo_tmp_location"
 sudo cp -r $repo_files_locaiton "$web_app_dir"
+
+# Setup cronjob to run job processor
+# every minute and run it once 
+# manually
+sudo crontab <<< "* * * * * su -c \"php $job_processor_script\" -s /bin/bash $user_to_run_as"
+php $job_processor_script
 
