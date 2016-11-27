@@ -67,7 +67,8 @@
 
         while($message = read_messages_from_queue($queue_url, $region, $queue_name)['Messages'][0])
         {
-
+            $job_to_process = get_job_to_process($message['Body']);
+            process_job($job_to_process);
         }
 
     }
