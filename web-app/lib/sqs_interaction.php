@@ -74,4 +74,29 @@
             exit(1);
         }
     }
-    
+
+    /* Deletes a message from
+     * the queue with the
+     * specified message
+     * handle
+     */
+    function delete_message_from_queue($queue_url, $message_handle, $region, $queue_name)
+    {
+        $sqs_client = new Aws\Sqs\SqsClient([
+            'version' => 'latest',
+            'region'  => "$region"
+        ]);
+
+        try
+        {
+            $sqs_client->deleteMessage([
+                'QueueUrl' => $queue_url,
+                'ReceiptHandle' => $message_handle
+            ]);
+        }
+        catch(\Aws\Sqs\Exception\SqsException $sqs_exception)
+        {
+            echo "Failed to delete message in queue: $queue_name, " . $sqs_exception->getMessage() . "\n";
+            exit(1);
+        }
+    }
