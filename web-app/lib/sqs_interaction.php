@@ -64,8 +64,7 @@
         try
         {
             $sqs_msgs = $sqs_client->receiveMessage([
-                'QueueUrl' => $queue_url,
-                'MaxNumberOfMessages' => 10
+                'QueueUrl' => $queue_url
             ]);
             return $sqs_msgs;
         }
@@ -75,3 +74,4 @@
             exit(1);
         }
     }
+    
