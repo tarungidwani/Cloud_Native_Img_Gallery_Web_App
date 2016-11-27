@@ -56,3 +56,9 @@
         $err_msg = "Failed update job record with reciept: $reciept in $table_name in DB: $db_name";
         execute_query($db_connection_info, $query_to_execute, $err_msg);
     }
+
+    function process_all_jobs()
+    {
+        
+    }
+    process_all_jobs();
