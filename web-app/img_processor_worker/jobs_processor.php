@@ -69,6 +69,9 @@
         {
             $job_to_process = get_job_to_process($message['Body']);
             process_job($job_to_process);
+
+            $message_handle = $message['ReceiptHandle'];
+            delete_message_from_queue($queue_url, $message_handle, $region, $queue_name);
         }
 
     }
