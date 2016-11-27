@@ -65,5 +65,10 @@
         $queue_name = $sqs_connection_info['queue_name'];
         $queue_url = get_queue_url($region, $queue_name);
 
+        while($message = read_messages_from_queue($queue_url, $region, $queue_name)['Messages'][0])
+        {
+
+        }
+
     }
     process_all_jobs();
