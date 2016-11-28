@@ -76,6 +76,18 @@ function create_env
 	printf "Completed Successfully\n"
 }
 
+function create_worker
+{
+	local security_group="$ec2_security_group"
+	local key_name="$1"
+	local iam_profile="$2"
+
+	printf "\nCreating worker instance\n"
+	./create-worker-instance.sh "$security_group" "$key_name" "$iam_profile"
+	printf "Completed Successfully\n"
+
+}
+
 if [ $# -ne 2 ]
 then
 	printf "\n***\nPlease provide the following 2 arguments in the given order:\n\n"
@@ -98,4 +110,6 @@ create_rds_sec_group
 create_app_infra
 
 create_env "$1" "$2"
+
+create_worker "$1" "$2"
 
