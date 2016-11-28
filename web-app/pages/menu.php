@@ -20,7 +20,8 @@
 
 <ul>
     <?php
-    foreach($features as $feature)
-        print "$feature";
+        echo "<h3>Welcome User: " . $_SESSION['user_name'] . "</h3>";
+        foreach($features as $feature)
+            print "$feature";
     ?>
 </ul>
