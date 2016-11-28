@@ -33,12 +33,17 @@ function delete_all_s3_buckets
 	done
 }
 
-# Deletes all simple and 
+# Deletes all simple and
 # fifo queues in SQS
 function delete_all_queues
 {
 	all_queue_urls=($(aws sqs list-queues --query QueueUrls[*] --output text))
 
+	if [ ${all_queue_urls[0]} == "None" ] && [ ${#all_queue_urls[@]} -eq 1 ]
+	then
+		return;
+	fi
+	
 	for queue_url in "${all_queue_urls[@]}"
 	do
 		aws sqs delete-queue --queue-url "$queue_url"
