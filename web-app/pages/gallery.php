@@ -17,5 +17,20 @@
 
         return $all_finished_image_records;
     }
+
+    function display_all_finished_images_of_user()
+    {
+        $all_finished_image_records = get_all_finished_images_of_user();
+
+        if(count($all_finished_image_records) == 0)
+            echo "<h2>No images to display for user: " . $_SESSION['user_name'] ."</h2>";
+
+        foreach($all_finished_image_records as $finished_image_record)
+        {
+            echo "<img src='" . $finished_image_record['s3_raw_url'] . "' height='200' width='300' style='padding-right: 50px' />";
+            echo "<img src='" . $finished_image_record['s3_finished_url'] . "' height='200' width='300' />";
+            echo "<br><br><br>";
+        }
+    }
 ?>
 
