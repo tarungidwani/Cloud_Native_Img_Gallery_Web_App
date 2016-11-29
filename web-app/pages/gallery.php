@@ -34,3 +34,16 @@
     }
 ?>
 
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery</title>
+</head>
+<body>
+    <?php
+        display_all_finished_images_of_user();
+    ?>
+</body>
+</html>
+
