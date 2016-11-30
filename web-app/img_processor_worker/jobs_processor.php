@@ -73,6 +73,5 @@
             $message_handle = $message['ReceiptHandle'];
             delete_message_from_queue($queue_url, $message_handle, $region, $queue_name);
         }
-
     }
     process_all_jobs();
