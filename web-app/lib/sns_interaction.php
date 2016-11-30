@@ -9,13 +9,8 @@
      * topic specified
      * in config file
      */
-    function get_topic_arn()
+    function get_topic_arn($topic_name, $region)
     {
-        $err_msg = "Failed to read SNS config file";
-        $sns_connection_info = read_info_from_config_file(constant("SNS_CONFIG"), $err_msg);
-        $topic_name = $sns_connection_info['topic_name'];
-        $region = $sns_connection_info['region'];
-
         $sns_client = new Aws\Sns\SnsClient([
             'version' => 'latest',
             'region'  => "$region"
@@ -33,7 +28,7 @@
             ]);
             return $sns_info['TopicArn'];
         }
-        catch (\Aws\Sns\Exception\SnsException $rds_exception)
+        catch (\Aws\Sns\Exception\SnsException $sns_exception)
         {
             echo "Topic $topic_name does not exist, please create required topic by running the create-app-env.sh script\n";
             exit(1);
