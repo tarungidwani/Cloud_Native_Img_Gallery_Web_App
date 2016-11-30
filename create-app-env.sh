@@ -62,3 +62,15 @@ visibility_timeout=600
 gallery_img_jobs_queue_url=$(aws sqs create-queue --queue-name "$queue_name"  --attributes VisibilityTimeout=$visibility_timeout \
                                                   --output text --region $region 2>> "$log_file_name")
 
+# Values needed to
+# create a topic in
+# SNS
+topic_name="gallery_img_job_notifier"
+property_name="DisplayName"
+display_name="Gallery_Img_Job_Notifier"
+
+# Creates a topic
+# in SNS
+topic_arn=$(aws sns create-topic --name "$topic_name" --region "$region" --output text 2>> "$log_file_name")
+aws sns set-topic-attributes --topic-arn "$topic_arn" --attribute-name "$property_name" --attribute-value "$display_name" 2>> "$log_file_name"
+
