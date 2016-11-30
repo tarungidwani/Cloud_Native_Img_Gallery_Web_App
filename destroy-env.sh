@@ -50,6 +50,28 @@ function delete_all_queues
 	done
 }
 
+# Deletes all topics and
+# subscriptions in SNS
+function delete_all_sns_topics
+{
+	all_topic_arns=($(aws sns list-topics --query Topics[*] --output text))
+	
+	for topic_arn in "${all_topic_arns[@]}"
+	do
+		all_subscription_arns=($(aws sns list-subscriptions-by-topic --topic-arn "$topic_arn" --query Subscriptions[*].SubscriptionArn --output text))
+
+		for subscription_arn in "${all_subscription_arns[@]}"
+		do
+			if [ "$subscription_arn" != "PendingConfirmation" ]
+			then
+				aws sns unsubscribe --subscription-arn "$subscription_arn"
+			fi
+		done
+		
+		aws sns delete-topic --topic-arn "$topic_arn"
+	done
+}
+
 # Deletes all auto scaling groups and terminates
 # all instances attached to it in the default
 # region
@@ -126,7 +148,6 @@ function terminate_all_instances
 # Instances
 function destroy_env
 {
-
 	printf "Deleting all DB instances in RDS........\n"
 	delete_all_db_instances
 	printf "Completed successfully!\n"
@@ -137,6 +158,10 @@ function destroy_env
 
 	printf "Deleting all queues in SQS........\n"
 	delete_all_queues
+	printf "Completed successfully!\n"
+
+	printf "Deleting all topics and subscriptions in SNS........\n"
+	delete_all_sns_topics
 	printf "Completed successfully!\n"
 
 	printf "Deleting all auto-scaling-groups.........\n"
