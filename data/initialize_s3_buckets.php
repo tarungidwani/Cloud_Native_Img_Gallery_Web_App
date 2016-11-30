@@ -40,3 +40,33 @@
         }
         return $stmt;
     }
+
+    function record_pre_seated_finished_job($s3_raw_url, $s3_finished_url)
+    {
+        $db_connection_info = setup_db_info();
+        $db_endpoint = $db_connection_info['db_endpoint'];
+        $db_username = $db_connection_info['db_username'];
+        $db_password = $db_connection_info['db_password'];
+        $db_name = $db_connection_info['db_name'];
+        $mysql_connection = new mysqli($db_endpoint, $db_username, $db_password, $db_name);
+
+        if(!$mysql_connection->connect_errno)
+        {
+            $insert_pre_seated_img_record_stmt       = setup_prepared_statement($mysql_connection, $db_connection_info['table_name_jobs']);
+            $insert_pre_seated_img_record_stmt_bound = bind_multiple_params_to_prepared_stmt($insert_pre_seated_img_record_stmt, $s3_raw_url, $s3_finished_url);
+            $result = $insert_pre_seated_img_record_stmt_bound->execute();
+
+            if(!$result)
+            {
+                echo "Failed to insert raw img job record (*Execution failed: " . $insert_pre_seated_img_record_stmt_bound->error . "*)";
+                exit(1);
+            }
+        }
+        else
+        {
+            echo "Failed to connect to RDS instance: $db_connection_info[db_endpoint]\n";
+            $mysql_connection->close();
+            exit(1);
+        }
+    }
+    
