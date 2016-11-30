@@ -4,6 +4,7 @@
     include_once dirname(__DIR__) . '/lib/config_reader.php';
     require dirname(__DIR__) . '/lib/s3_interaction.php';
     require dirname(__DIR__) . '/lib/sqs_interaction.php';
+    require dirname(__DIR__) . '/lib/sns_interaction.php';
 
     define("S3CONFIGPATH", dirname(__DIR__) . '/config/s3_connection');
     define("SQSCONFIGPATH", dirname(__DIR__) . '/config/sqs_connection');
@@ -72,6 +73,10 @@
 
             $message_handle = $message['ReceiptHandle'];
             delete_message_from_queue($queue_url, $message_handle, $region, $queue_name);
+
+            $subject = "Image Processing Job Complete";
+            $msg_body = "Your image has been processed. Login to the gallery web app and click on Gallery on the top menu to view your results";
+            publish_to_topic($subject, $msg_body);
         }
     }
     process_all_jobs();
