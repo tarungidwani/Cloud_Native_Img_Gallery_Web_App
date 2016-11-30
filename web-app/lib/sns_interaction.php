@@ -1,5 +1,5 @@
 <?php
-    require 'config_reader.php';
+    include_once 'config_reader.php';
     include_once dirname(__DIR__) . '/aws_sdk/aws-autoloader.php';
 
     define("SNS_CONFIG", dirname(__DIR__) . '/config/sns_connection');
