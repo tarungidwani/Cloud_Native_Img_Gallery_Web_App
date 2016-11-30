@@ -1,4 +1,8 @@
 <?php
+    include_once dirname(__DIR__) . '/web-app/lib/config_reader.php';
+    include_once dirname(__DIR__) . '/web-app/lib/s3_interaction.php';
+    include_once dirname(__DIR__) . '/web-app/lib/db_interaction.php';
+
     /* Paths to imgs that will
      * pre-seated in this
      * gallery web app
@@ -9,6 +13,8 @@
     define("IMG_2_finished", dirname(__DIR__) . '/web-app/imgs/Knuth-bw.jpg');
     define("IMG_3_raw"     , dirname(__DIR__) . '/web-app/imgs/mountain.jpg');
     define("IMG_3_finished", dirname(__DIR__) . '/web-app/imgs/mountain-bw.jpg');
+
+    define("S3_CONFIG"     , dirname(__DIR__) . '/web-app/config/s3_connection');
 
     function setup_prepared_statement($mysql_connection, $jobs_table_name)
     {
@@ -69,4 +75,5 @@
             exit(1);
         }
     }
+
     
