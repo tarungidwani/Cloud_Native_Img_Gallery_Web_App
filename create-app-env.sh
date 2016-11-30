@@ -51,6 +51,7 @@ region="us-west-2"
 
 aws s3 mb s3://$raw_bucket_name    --region $region > /dev/null 2>> "$log_file_name"
 aws s3 mb s3://$finish_bucket_name --region $region > /dev/null 2>> "$log_file_name"
+php ./data/initialize_s3_buckets.php
 
 # Values needed to create 
 # a queue in SQS
