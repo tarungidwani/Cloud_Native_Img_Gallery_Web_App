@@ -43,7 +43,7 @@
 
         $stmt->bind_param("sisssss", $id ,$user_login_id, $phone_number, $s3_raw_url, $s3_finished_url, $status, $reciept);
 
-        if(!stmt)
+        if(!$stmt)
         {
             echo "Failed to insert raw img job record (*Bind failed: " . $stmt->error . "*)";
             exit(1);
