@@ -7,6 +7,7 @@
 #					 -> RDS
 #					 -> S3
 #          -> SQS
+#          -> SNS
 
 log_file_name="app-env-log.txt"
 
@@ -33,12 +34,12 @@ aws rds create-db-instance --engine "$db_engine" --db-instance-class "$db_instan
 
 # Waits for specified db instance to
 # become available
-aws rds wait db-instance-available --db-instance-identifier "$db_instance_identifier"
+aws rds wait db-instance-available --db-instance-identifier "$db_instance_identifier" 2>> "$log_file_name"
 
 # Initialize DB with required
 # tables and sample data
 db_endpoint=$(aws rds describe-db-instances --db-instance-identifier "$db_instance_identifier" --query DBInstances[*].Endpoint.Address \
-							--output text)
+							--output text 2>> "$log_file_name")
 ./data/initialize_db.sh "$db_endpoint" "$db_master_username" "$db_master_user_password"
 
 # Values needed to create 
@@ -59,5 +60,5 @@ visibility_timeout=600
 # Creates a simple queue
 # within SQS
 gallery_img_jobs_queue_url=$(aws sqs create-queue --queue-name "$queue_name"  --attributes VisibilityTimeout=$visibility_timeout \
-                                                  --output text --region $region)
+                                                  --output text --region $region 2>> "$log_file_name")
 
