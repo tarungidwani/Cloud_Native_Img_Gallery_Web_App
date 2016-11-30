@@ -76,4 +76,25 @@
         }
     }
 
-    
+    function pre_seat_imgs_web_app()
+    {
+        $err_msg = "Failed to read S3 config file";
+        $s3_connection_info = read_info_from_config_file(constant("S3_CONFIG"), $err_msg);
+        $raw_bucket_name = $s3_connection_info['raw_bucket_name'];
+        $finished_bucket_name = $s3_connection_info['finished_bucket_name'];
+        $region = $s3_connection_info['region'];
+
+        $img_1_raw_url      = submit_file_to_s3($raw_bucket_name     , constant("IMG_1_raw")     , $region);
+        $img_1_finished_url = submit_file_to_s3($finished_bucket_name, constant("IMG_1_finished"), $region);
+        record_pre_seated_finished_job($img_1_raw_url, $img_1_finished_url);
+
+        $img_2_raw_url      = submit_file_to_s3($raw_bucket_name     , constant("IMG_2_raw")     , $region);
+        $img_2_finished_url = submit_file_to_s3($finished_bucket_name, constant("IMG_2_finished"), $region);
+        record_pre_seated_finished_job($img_2_raw_url, $img_2_finished_url);
+
+        $img_3_raw_url      = submit_file_to_s3($raw_bucket_name     , constant("IMG_3_raw")     , $region);
+        $img_3_finished_url = submit_file_to_s3($finished_bucket_name, constant("IMG_3_finished"), $region);
+        record_pre_seated_finished_job($img_3_raw_url, $img_3_finished_url);
+    }
+
+    pre_seat_imgs_web_app();
