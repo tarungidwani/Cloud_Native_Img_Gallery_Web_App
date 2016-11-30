@@ -74,3 +74,18 @@ display_name="Gallery_Img_Job_Notifier"
 topic_arn=$(aws sns create-topic --name "$topic_name" --region "$region" --output text 2>> "$log_file_name")
 aws sns set-topic-attributes --topic-arn "$topic_arn" --attribute-name "$property_name" --attribute-value "$display_name" 2>> "$log_file_name"
 
+# Values needed to
+# subscribe users
+# to a topic in SNS
+protocol="email"
+subscriber_email_addresses_file=./data/subscriber_email_addresses.txt
+
+# Subscribes all
+# email addresses
+# in the subscriber
+# email addresses file
+while read subscriber_email_addresses
+do
+	aws sns subscribe --topic-arn "$topic_arn" --protocol "$protocol" --notification-endpoint "$subscriber_email_addresses" > /dev/null 2>> "$log_file_name"
+done < $subscriber_email_addresses_file
+
