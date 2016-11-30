@@ -95,7 +95,7 @@ aws autoscaling attach-load-balancers --auto-scaling-group-name "$auto_scaling_g
 
 printf "\n"
 printf "Load-balancer-url to web-app: $lb_dns_name\n\n"
-printf "**May have to wait 2-5 mins for the following to complete:\n"
+printf "**May have to wait 10-25 mins for the following to complete:\n"
 printf "\t1. Instances of autoscaling group to become running\n"
 printf "\t2. Initialization of these instances with the specified user-data script provided\n"
 printf "\t3. Instances of the autoscaling group to become InService in the load balancer\n"
