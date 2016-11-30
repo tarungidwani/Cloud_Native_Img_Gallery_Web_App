@@ -1,6 +1,6 @@
 <?php
 
-    require 'config_reader.php';
+    include_once 'config_reader.php';
     include_once dirname(__DIR__) . '/aws_sdk/aws-autoloader.php';
 
     /* Querys AWS's RDS to get the endpoint of the DB instance
