@@ -35,4 +35,35 @@
         }
     }
 
+    /* Publishes a message
+     * to a topic in SNS
+     */
+    function publish_to_topic($subject, $msg_body)
+    {
+        $err_msg = "Failed to read SNS config file";
+        $sns_connection_info = read_info_from_config_file(constant("SNS_CONFIG"), $err_msg);
+        $topic_name = $sns_connection_info['topic_name'];
+        $region = $sns_connection_info['region'];
+
+        $sns_client = new Aws\Sns\SnsClient([
+            'version' => 'latest',
+            'region'  => "$region"
+        ]);
+
+        try
+        {
+            $topic_arn = get_topic_arn($topic_name, $region);
+
+            $sns_client->publish([
+                'TopicArn' => $topic_arn,
+                'Subject' => $subject,
+                'Message' => $msg_body
+            ]);
+        }
+        catch (\Aws\Sns\Exception\SnsException $sns_exception)
+        {
+            echo "Failed to publish message to $topic_name, " . $sns_exception->getMessage() ."\n";
+            exit(1);
+        }
+    }
     
