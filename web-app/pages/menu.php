@@ -1,15 +1,10 @@
 <?php
-
     require 'init.php';
     require dirname(__DIR__) . '/lib/feature_status.php';
 
     function get_enabled_features()
     {
-        $features = ["<li><a href=\"gallery.php\">Gallery</a></li>"];
-        $is_upload_feature_enabled = is_feature_enabled('upload');
-
-        if($is_upload_feature_enabled)
-            $features[] = "<li><a href=\"upload.php\">Upload</a></li>";
+        $features = ["<li><a href=\"gallery.php\">Gallery</a></li>", "<li><a href=\"upload.php\">Upload</a></li>"];
 
         if($_SESSION['is_admin'])
             $features[] = "<li><a href=\"admin.php\">Admin</a></li>";
