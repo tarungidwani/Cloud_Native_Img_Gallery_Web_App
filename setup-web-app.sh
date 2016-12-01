@@ -3,6 +3,12 @@
 function install_dependencies
 {
 	sudo apt-get -y install mysql-client &> /dev/null 
+
+	# Installs all tools needed
+	# to install and setup php
+	sudo apt-get -y install zip   &> /dev/null
+	sudo apt-get -y install unzip &> /dev/null
+	sudo apt-get -y install curl  &> /dev/null
 }
 
 ec2_security_group="gallery-web-app-sec-group"
