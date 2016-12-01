@@ -81,9 +81,10 @@
 
     function validate_image_file_type()
     {
-        $img_file_type = $_FILES['img_path']['type'];
+        $img_file_path = $_FILES['img_path']['tmp_name'];
+        $img_file_type = exif_imagetype($img_file_path);
 
-        if($img_file_type != 'image/jpeg' && $img_file_type != 'image/png')
+        if($img_file_type != 2 && $img_file_type != 3)
         {
             $_SESSION['invalid_img_type_err'] = "Invalid image type $img_file_type, please upload a jpg or png file to process";
             header('Location: upload.php');
