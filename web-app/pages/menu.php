@@ -1,6 +1,5 @@
 <?php
     require 'init.php';
-    require dirname(__DIR__) . '/lib/feature_status.php';
 
     function get_enabled_features()
     {
