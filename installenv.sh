@@ -10,6 +10,10 @@ repo_url=git@github.com:illinoistech-itm/tgidwani.git
 repo_tmp_location=/tmp/repo
 repo_files_locaiton=$repo_tmp_location/web-app/*
 
+# Installs the mysql
+# cmdline client
+sudo apt-get -y install mysql-client &> /dev/null
+
 # Installs and starts
 # the apache2 web server
 run-one-until-success sudo apt-get -y install apache2
