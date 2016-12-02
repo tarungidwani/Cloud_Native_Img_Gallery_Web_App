@@ -46,6 +46,8 @@
 
         $backup_command = "mysqldump --opt -h $db_endpoint -u $db_username -p$db_password $db_name > $back_up_file 2> /dev/null";
         system($backup_command);
+
+        save_db_back_up_to_s3_bucket($back_up_file);
     }
 
     $value_submitted = $_POST['submit'];
