@@ -13,6 +13,12 @@
     <title>Admin</title>
 </head>
 <body>
+    <h3>Upload Feature</h3>
+    <form method="post">
+        <input type="radio"  name="upload_feature_status" value=1> Enable
+        <input type="radio"  name="upload_feature_status" value=0> Disable
+        <input type="submit" name="submit"                value="Save" formaction="admin_features.php">
+    </form>
 </body>
 </html>
 
