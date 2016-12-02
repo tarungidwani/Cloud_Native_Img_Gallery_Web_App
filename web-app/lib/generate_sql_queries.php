@@ -14,4 +14,9 @@
     {
         return "SELECT * FROM $db_name.$table_name where feature = \"$feature_name\"";
     }
+
+    function create_update_status_by_feature_name($db_name, $table_name, $feature_name, $status)
+    {
+        return "UPDATE $db_name.$table_name SET status = '$status' WHERE FEATURE = '$feature_name'";
+    }
     
