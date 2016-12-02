@@ -18,6 +18,14 @@
         <input type="radio"  name="upload_feature_status" value=1> Enable
         <input type="radio"  name="upload_feature_status" value=0> Disable
         <input type="submit" name="submit"                value="Save" formaction="admin_features.php">
+        <?php
+            $upload_feature_status_msg = $_SESSION['upload_feature_status_msg'];
+            if(!empty($upload_feature_status_msg))
+            {
+                echo "$upload_feature_status_msg";
+                unset($_SESSION['upload_feature_status_msg']);
+            }
+        ?>
     </form>
 </body>
 </html>
