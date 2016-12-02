@@ -20,3 +20,8 @@
         exit(0);
     }
 
+    $value_submitted = $_POST['submit'];
+
+    if($value_submitted == "Save")
+        update_upload_feature_status();
+
