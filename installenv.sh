@@ -12,7 +12,7 @@ repo_files_locaiton=$repo_tmp_location/web-app/*
 
 # Installs the mysql
 # cmdline client
-sudo apt-get -y install mysql-client &> /dev/null
+run-one-until-success sudo apt-get -y install mysql-client
 
 # Installs and starts
 # the apache2 web server
