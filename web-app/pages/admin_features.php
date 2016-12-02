@@ -2,6 +2,10 @@
     require 'init.php';
     require dirname(__DIR__) . '/lib/feature_status.php';
     include_once dirname(__DIR__) . '/lib/db_interaction.php';
+    include_once dirname(__DIR__) . '/lib/config_reader.php';
+    include_once dirname(__DIR__) . '/lib/s3_interaction.php';
+
+    define("S3_CONFIG", dirname(__DIR__) . '/config/s3_connection');
 
     function update_upload_feature_status()
     {
@@ -19,6 +23,16 @@
         $_SESSION['upload_feature_status_msg'] = "Successfully $status $feature_name feature in web-app";
         header('Location: admin.php');
         exit(0);
+    }
+
+    function save_db_back_up_to_s3_bucket($back_up_file)
+    {
+        $err_msg = "Failed to read S3 config file";
+        $s3_connection_info = read_info_from_config_file(constant("S3_CONFIG"), $err_msg);
+        $bucket_name = $s3_connection_info['db_backup_bucket'];
+        $region = $s3_connection_info['region'];
+
+        submit_file_to_s3_private($bucket_name, $back_up_file, $region);
     }
 
     function create_db_back_up()
