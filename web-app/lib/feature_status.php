@@ -33,3 +33,20 @@
 
         return $feature_status_info;
     }
+
+    /* Updates the status
+     * of the specified
+     * feature stored
+     * in DB table
+     */
+    function set_feature_status($feature_name, $status)
+    {
+        $db_connection_info = setup_db_info();
+        $db_name = $db_connection_info['db_name'];
+        $table_name = $db_connection_info['table_name_features'];
+        $query = create_update_status_by_feature_name($db_name, $table_name, $feature_name, $status);
+
+        $err_msg = "Failed to update $feature_name feature status information in table $table_name in db $db_name";
+        execute_query($db_connection_info, $query, $err_msg);
+    }
+
