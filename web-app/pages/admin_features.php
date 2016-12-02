@@ -48,6 +48,8 @@
         system($backup_command);
 
         save_db_back_up_to_s3_bucket($back_up_file);
+
+        unlink($back_up_file);
     }
 
     $value_submitted = $_POST['submit'];
