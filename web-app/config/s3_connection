@@ -1,4 +1,4 @@
 raw_bucket_name = raw-tng
 finished_bucket_name = finished-tng
-db_back_bucket = db-backups
+db_back_bucket = db-backups-tng
 region = us-west-2

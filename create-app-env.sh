@@ -47,7 +47,7 @@ db_endpoint=$(aws rds describe-db-instances --db-instance-identifier "$db_instan
 # buckets in S3
 raw_bucket_name=$2
 finish_bucket_name=$3
-db_backup_bucket="db-backups"
+db_backup_bucket="db-backups-tng"
 region="us-west-2"
 
 aws s3 mb s3://$raw_bucket_name    --region $region > /dev/null 2>> "$log_file_name"
