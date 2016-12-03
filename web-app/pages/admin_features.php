@@ -119,4 +119,6 @@
         update_upload_feature_status();
     elseif($value_submitted == "Back Up")
         create_db_back_up();
+    elseif($value_submitted == "Restore")
+        restore_db_from_latest_back_up();
 
