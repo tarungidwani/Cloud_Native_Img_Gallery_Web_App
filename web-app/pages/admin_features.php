@@ -108,6 +108,9 @@
             exit(1);
         }
 
+        $_SESSION['db_backup_msg'] = "Restored DB $db_name from latest backup successfully";
+        header('Location: admin.php');
+        exit(0);
     }
 
     $value_submitted = $_POST['submit'];
