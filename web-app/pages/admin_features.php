@@ -54,7 +54,12 @@
 
         save_db_back_up_to_s3_bucket($back_up_file);
 
-        unlink($back_up_file);
+        $is_delete_successful = unlink($back_up_file);
+        if(!$is_delete_successful)
+        {
+            $_SESSION['db_backup_msg'] = "Failed to delete DB $db_name backup from EC2 instance's filesystem";
+            exit(1);
+        }
     }
 
     $value_submitted = $_POST['submit'];
