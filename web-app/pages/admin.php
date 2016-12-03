@@ -26,6 +26,9 @@
                 unset($_SESSION['upload_feature_status_msg']);
             }
         ?>
+
+        <h3>DB Backup</h3>
+        <input type="submit" name="submit"                value="Back Up" formaction="admin_features.php">
     </form>
 </body>
 </html>
