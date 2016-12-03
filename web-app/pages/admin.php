@@ -29,6 +29,14 @@
 
         <h3>DB Backup</h3>
         <input type="submit" name="submit"                value="Back Up" formaction="admin_features.php">
+        <?php
+            $db_backup_feature_msg = $_SESSION['db_backup_msg'];
+            if(!empty($db_backup_feature_msg))
+            {
+                echo "$db_backup_feature_msg";
+                unset($_SESSION['db_backup_msg']);
+            }
+        ?>
     </form>
 </body>
 </html>
