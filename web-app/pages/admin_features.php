@@ -68,6 +68,22 @@
         exit(0);
     }
 
+    function restore_db_from_latest_back_up()
+    {
+        $err_msg = "Failed to read S3 config file";
+        $s3_connection_info = read_info_from_config_file(constant("S3_CONFIG"), $err_msg);
+        $bucket_name = $s3_connection_info['db_backup_bucket'];
+        $region = $s3_connection_info['region'];
+
+        $db_connection_info = setup_db_info();
+        $db_name = $db_connection_info['db_name'];
+        $db_endpoint = $db_connection_info['db_endpoint'];
+        $db_username = $db_connection_info['db_username'];
+        $db_password = $db_connection_info['db_password'];
+        $key_name = $db_name . "_back_up.sql";
+        $file_location = "/tmp/$key_name";
+    }
+
     $value_submitted = $_POST['submit'];
 
     if($value_submitted == "Save")
