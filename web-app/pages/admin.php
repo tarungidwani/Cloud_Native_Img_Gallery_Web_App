@@ -37,6 +37,9 @@
                 unset($_SESSION['db_backup_msg']);
             }
         ?>
+
+        <h3>DB Restore</h3>
+        <input type="submit" name="submit"                value="Restore" formaction="admin_features.php">
     </form>
 </body>
 </html>
