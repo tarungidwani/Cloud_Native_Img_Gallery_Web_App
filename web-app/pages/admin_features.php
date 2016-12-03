@@ -99,6 +99,15 @@
             header('Location: admin.php');
             exit(1);
         }
+
+        $is_delete_successful = unlink($file_location);
+        if(!$is_delete_successful)
+        {
+            $_SESSION['db_backup_msg'] = "Failed to delete DB $db_name backup from EC2 instance's filesystem";
+            header('Location: admin.php');
+            exit(1);
+        }
+
     }
 
     $value_submitted = $_POST['submit'];
