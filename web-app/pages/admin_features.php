@@ -72,4 +72,6 @@
 
     if($value_submitted == "Save")
         update_upload_feature_status();
+    elseif($value_submitted == "Back Up")
+        create_db_back_up();
 
