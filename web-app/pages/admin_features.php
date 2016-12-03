@@ -82,6 +82,14 @@
         $db_password = $db_connection_info['db_password'];
         $key_name = $db_name . "_back_up.sql";
         $file_location = "/tmp/$key_name";
+
+        $get_db_back_up_file_from_s3_status = get_file_from_s3($bucket_name, $key_name, $file_location, $region);
+        if($get_db_back_up_file_from_s3_status != "Success")
+        {
+            $_SESSION['db_restore_msg'] = $get_db_back_up_file_from_s3_status;
+            header('Location: admin.php');
+            exit(1);
+        }
     }
 
     $value_submitted = $_POST['submit'];
