@@ -42,7 +42,7 @@
         $db_username = $db_connection_info['db_username'];
         $db_password = $db_connection_info['db_password'];
         $db_name = $db_connection_info['db_name'];
-        $back_up_file = $db_name . "_back_up.sql";
+        $back_up_file = "/tmp/" . $db_name . "_back_up.sql";
 
         $backup_command = "sudo mysqldump --opt -h $db_endpoint -u $db_username -p$db_password $db_name > $back_up_file 2> /dev/null";
         system($backup_command, $backup_command_return_value);
