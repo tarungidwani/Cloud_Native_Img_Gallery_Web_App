@@ -60,6 +60,9 @@
             $_SESSION['db_backup_msg'] = "Failed to delete DB $db_name backup from EC2 instance's filesystem";
             exit(1);
         }
+
+        $_SESSION['db_backup_msg'] = "Created DB $db_name backup successfully";
+        exit(0);
     }
 
     $value_submitted = $_POST['submit'];
