@@ -103,12 +103,12 @@
         $is_delete_successful = unlink($file_location);
         if(!$is_delete_successful)
         {
-            $_SESSION['db_backup_msg'] = "Failed to delete DB $db_name backup from EC2 instance's filesystem";
+            $_SESSION['db_restore_msg'] = "Failed to delete DB $db_name backup from EC2 instance's filesystem";
             header('Location: admin.php');
             exit(1);
         }
 
-        $_SESSION['db_backup_msg'] = "Restored DB $db_name from latest backup successfully";
+        $_SESSION['db_restore_msg'] = "Restored DB $db_name from latest backup successfully";
         header('Location: admin.php');
         exit(0);
     }
