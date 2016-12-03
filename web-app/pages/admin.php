@@ -40,6 +40,14 @@
 
         <h3>DB Restore</h3>
         <input type="submit" name="submit"                value="Restore" formaction="admin_features.php">
+        <?php
+            $restore_backup_feature_msg = $_SESSION['db_restore_msg'];
+            if(!empty($restore_backup_feature_msg))
+            {
+                echo "$restore_backup_feature_msg";
+                unset($_SESSION['db_restore_msg']);
+            }
+        ?>
     </form>
 </body>
 </html>
