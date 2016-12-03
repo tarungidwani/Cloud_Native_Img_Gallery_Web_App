@@ -45,7 +45,12 @@
         $back_up_file = $db_name . "_back_up.sql";
 
         $backup_command = "mysqldump --opt -h $db_endpoint -u $db_username -p$db_password $db_name > $back_up_file 2> /dev/null";
-        system($backup_command);
+        system($backup_command, $backup_command_return_value);
+        if($backup_command_return_value != 0)
+        {
+            $_SESSION['db_backup_msg'] = "Failed to backup DB $db_name, please ensure that DB exists and you have the appropriate permissions to carry out operations";
+            exit(1);
+        }
 
         save_db_back_up_to_s3_bucket($back_up_file);
 
