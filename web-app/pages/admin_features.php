@@ -90,6 +90,15 @@
             header('Location: admin.php');
             exit(1);
         }
+
+        $restore_command = "mysql -h $db_endpoint -u $db_username -p$db_password $db_name < $file_location 2> /dev/null";
+        system($restore_command, $restore_command_return_value);
+        if($restore_command_return_value != 0)
+        {
+            $_SESSION['db_restore_msg'] = "Failed to restore DB $db_name from DB backup $key_name";
+            header('Location: admin.php');
+            exit(1);
+        }
     }
 
     $value_submitted = $_POST['submit'];
