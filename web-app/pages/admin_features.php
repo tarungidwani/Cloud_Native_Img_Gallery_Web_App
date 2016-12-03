@@ -49,6 +49,7 @@
         if($backup_command_return_value != 0)
         {
             $_SESSION['db_backup_msg'] = "Failed to backup DB $db_name, please ensure that DB exists and you have the appropriate permissions to carry out operations";
+            header('Location: admin.php');
             exit(1);
         }
 
@@ -58,10 +59,12 @@
         if(!$is_delete_successful)
         {
             $_SESSION['db_backup_msg'] = "Failed to delete DB $db_name backup from EC2 instance's filesystem";
+            header('Location: admin.php');
             exit(1);
         }
 
         $_SESSION['db_backup_msg'] = "Created DB $db_name backup successfully";
+        header('Location: admin.php');
         exit(0);
     }
 
