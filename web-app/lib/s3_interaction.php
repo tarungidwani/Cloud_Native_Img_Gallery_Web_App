@@ -55,3 +55,32 @@
         }
     }
 
+    /* Retrieves a file
+     * stored in an
+     * S3 bucket based
+     * on search key
+     * provided
+     */
+    function get_file_from_s3($bucket_name, $key_name, $file_location, $region)
+    {
+        $s3_client = new \Aws\S3\S3Client([
+            'version' => 'latest',
+            'region'  => "$region"
+        ]);
+
+        try
+        {
+            $s3_client->getObject([
+                'Bucket'     => $bucket_name,
+                'Key'        => $key_name,
+                'SaveAs'     =>  $file_location
+            ]);
+            return "Success";
+        }
+        catch(\Aws\S3\Exception\S3Exception $s3_exception)
+        {
+            echo "Failed to get db backup from bucket $bucket_name " . $s3_exception->getMessage() ."\n";
+            return "Currently no backups exist, please create a DB backup first before trying to restore";
+        }
+    }
+
