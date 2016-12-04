@@ -31,4 +31,10 @@
     * Replace **&lt;key-name&gt;** with the name of a valid EC2 Key Pair 
     * Replace **&lt;iam-profile-name&gt;** with the name of a valid IAM profile that has the PowerUserAccess policy set
 
+##Contact
+
+* **Please feel free to contact the author with any questions, concerns and/or feedback**
+    * Author: Tarun Gidwani
+    * Email:  tgidwani@hawk.iit.edu
+    * Phone:  (630)-881-3597
 
