@@ -18,15 +18,17 @@
 * **To add more subscribers**: Enter valid email addresses of users into the [data/subscriber\_email\_addresses.txt](data/subscriber_email_addresses.txt) file
     * **Note:** Make additions before running the deploy web-app script as the users are subscribed to SNS as part of the deployment process
 
+##Deploy Instructions
 
+1. Clone this repository: [Cloud-Based-Gallery-Web-App](https://github.com/illinoistech-itm/tgidwani) onto your Ubuntu 16.04 LTS system
 
-### 2. Clone this repository: [ITMO-444-Repo](https://github.com/illinoistech-itm/tgidwani)
+2. Change directory (cd) into this repository's directory
 
-### 3. cd into this repository 
-### 4. Run script: setup-web-app.sh
-`./setup-web-app.sh "<key-name>" "<iam-profile-name>"`
+4. Run script: setup-web-app.sh
 
-- Replace **&lt;key-name&gt;** with the name of valid key to enable ssh logins into EC2 instances
-- Replace **&lt;iam-profile-name&gt;** with the name of an valid IAM profile that has the PowerUserAccess policy set
+     `./setup-web-app.sh "<key-name>" "<iam-profile-name>"`
+
+    * Replace **&lt;key-name&gt;** with the name of a valid EC2 Key Pair 
+    * Replace **&lt;iam-profile-name&gt;** with the name of a valid IAM profile that has the PowerUserAccess policy set
 
 
