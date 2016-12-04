@@ -1,4 +1,4 @@
-# Setup Web App
+# Cloud Native Gallery Web App
 
 ##Prerequisites
 
