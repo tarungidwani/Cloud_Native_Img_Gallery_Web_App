@@ -39,6 +39,9 @@ Once the web-app deployment script has completed successfully:
     * Go to their email's inbox
     * Click or search for an email from Gallery\_Img\_Job\_Notifier and
     * Click on the confirm subscription link inside that email to begin receiving email notifications from the web-app
+
+2. The deployment script will display an URL to access the web-app
+    * **Note: An additional 10-25 mins wait time might be required for the web-app to become available**
     
 ##Contact
 
