@@ -42,7 +42,19 @@ Once the web-app deployment script has completed successfully:
 
 2. The deployment script will display an URL to access the web-app
     * **Note: An additional 10-25 mins wait time might be required for the web-app to become available**
-    
+
+3. Visit said URL and Login to the web-app
+
+####Login Credentials
+
+    * Name:     Jeremy Hajek
+    * Username: hajek@iit.edu
+    * Password: LetMeInJeremy
+
+    * Name:     Admin
+    * Username: controller
+    * Password: LetMeInController
+   
 ##Contact
 
 * **Please feel free to contact the author with any questions, concerns and/or feedback**
