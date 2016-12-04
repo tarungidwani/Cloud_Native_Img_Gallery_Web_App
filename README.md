@@ -1,5 +1,15 @@
 # Setup Web App
 
+##Prerequisites
+
+* System running Ubuntu 16.04 LTS on a physical or virtual machine
+    * The deployment scripts have been tailored and tested to work on a Ubuntu 16.04 LTS system
+* [AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-set-up.html) installed and configured with:
+    * Credentials of an AWS account that has access to [AWS IAM Roles](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
+    * Default region to be **us-west-2**
+
+
+
 ### 1. Create an IAM role that has the PowerUserAccess policy set
 
 ### 2. Clone this repository: [ITMO-444-Repo](https://github.com/illinoistech-itm/tgidwani)
