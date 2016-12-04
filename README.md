@@ -31,6 +31,15 @@
     * Replace **&lt;key-name&gt;** with the name of a valid EC2 Key Pair 
     * Replace **&lt;iam-profile-name&gt;** with the name of a valid IAM profile that has the PowerUserAccess policy set
 
+##Usage
+
+Once the web-app deployment script has completed successfully:
+
+1. Users will receive an email at the email address associated with their account. In order to receive any email notifications from the web-app, users must first:
+    * Go to their email's inbox
+    * Click or search for an email from Gallery\_Img\_Job\_Notifier and
+    * Click on the confirm subscription link inside that email to begin receiving email notifications from the web-app
+    
 ##Contact
 
 * **Please feel free to contact the author with any questions, concerns and/or feedback**
